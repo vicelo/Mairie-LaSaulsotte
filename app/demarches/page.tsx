@@ -1,7 +1,19 @@
+import type { Metadata } from "next";
 import { PageLayout } from "@/components/layout/PageLayout";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { getAllDemarches } from "@/lib/demarches";
 import DemarchesClient from "./DemarchesClient";
+
+export const metadata: Metadata = {
+  title: "Démarches administratives",
+  description:
+    "Retrouvez toutes les démarches administratives accessibles auprès de la mairie de La Saulsotte.",
+  openGraph: {
+    title: "Démarches administratives — Mairie de La Saulsotte",
+    description:
+      "Retrouvez toutes les démarches administratives accessibles auprès de la mairie de La Saulsotte.",
+  },
+};
 
 export default function DemarchesPage() {
   const demarches = getAllDemarches();

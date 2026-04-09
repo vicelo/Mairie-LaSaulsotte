@@ -1,7 +1,17 @@
+import type { Metadata } from "next";
 import { PageLayout } from "@/components/layout/PageLayout";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { getAllActualites } from "@/lib/actualites";
 import ActualitesClient from "./ActualitesClient";
+
+export const metadata: Metadata = {
+  title: "Actualités",
+  description: "Toutes les actualités et informations municipales de la commune de La Saulsotte.",
+  openGraph: {
+    title: "Actualités — Mairie de La Saulsotte",
+    description: "Toutes les actualités et informations municipales de la commune de La Saulsotte.",
+  },
+};
 
 export default function ActualitesPage() {
   const actualites = getAllActualites();
