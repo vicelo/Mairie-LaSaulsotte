@@ -1,36 +1,124 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mairie de La Saulsotte — Site Web
 
-## Getting Started
+Site officiel de la commune de La Saulsotte (10), refonte complète.
 
-First, run the development server:
+## Stack technique
+
+| Outil          | Version         | Rôle                       |
+| -------------- | --------------- | -------------------------- |
+| Next.js        | 14 (App Router) | Framework React full-stack |
+| TypeScript     | 5               | Typage statique            |
+| Tailwind CSS   | 3               | Styles utilitaires         |
+| ESLint         | 8               | Linting                    |
+| Prettier       | 3               | Formatage                  |
+| Husky          | 9               | Hooks Git                  |
+| GitHub Actions | —               | CI/CD                      |
+
+## Prérequis
+
+- Node.js 20+
+- npm 10+
+
+## Démarrage rapide
 
 ```bash
+# Installer les dépendances
+npm install
+
+# Lancer le serveur de développement
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ouvrir [http://localhost:3000](http://localhost:3000) dans le navigateur.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts disponibles
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run dev          # Serveur de développement (hot reload)
+npm run build        # Build de production
+npm run start        # Serveur de production
+npm run lint         # ESLint
+npm run lint:fix     # ESLint avec corrections automatiques
+npm run format       # Prettier (écriture)
+npm run format:check # Prettier (vérification)
+```
 
-## Learn More
+## Structure du projet
 
-To learn more about Next.js, take a look at the following resources:
+```
+.
+├── app/                  # App Router Next.js
+│   ├── layout.tsx        # Layout racine (métadonnées, polices)
+│   ├── page.tsx          # Page d'accueil
+│   └── globals.css       # Styles globaux + tokens CSS
+├── components/           # Composants React réutilisables
+│   ├── ui/               # Composants UI atomiques (boutons, cartes…)
+│   ├── layout/           # Header, Footer, Navigation
+│   └── sections/         # Sections de pages (Hero, Actualités…)
+├── content/              # Contenu statique / CMS local
+│   ├── actualites/       # Articles d'actualité (MDX)
+│   ├── pages/            # Contenu des pages statiques
+│   └── documents/        # Documents téléchargeables
+├── lib/                  # Utilitaires et helpers
+├── types/                # Types TypeScript partagés
+└── public/               # Assets statiques
+    ├── images/           # Photos et illustrations
+    ├── icons/            # Icônes SVG
+    └── fonts/            # Polices locales
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Palette de couleurs
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Token         | Valeur    | Usage                             |
+| ------------- | --------- | --------------------------------- |
+| `primary`     | `#2a6010` | Vert village — couleur principale |
+| `primary-100` | `#d4edbc` | Vert clair — fonds, badges        |
+| `accent`      | `#f89522` | Orange vif — CTA, accents         |
+| `accent-dark` | `#c44e17` | Orange foncé — hover, survol      |
 
-## Deploy on Vercel
+Utilisation dans les classes Tailwind :
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```tsx
+<button className="bg-primary text-white hover:bg-primary-700">
+  Voir les démarches
+</button>
+<span className="bg-primary-100 text-primary">Nouveau</span>
+<a className="text-accent hover:text-accent-dark">En savoir plus →</a>
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## CI/CD
+
+Le pipeline GitHub Actions (`.github/workflows/ci.yml`) exécute à chaque push/PR :
+
+1. **Lint** — ESLint + vérification Prettier
+2. **TypeScript** — `tsc --noEmit`
+3. **Build** — `next build` (dépend du lint)
+
+## Hébergement cible
+
+OVH / Infomaniak (export statique ou Node.js). **Pas de Vercel.**
+
+Pour un export statique :
+
+```js
+// next.config.mjs
+const nextConfig = {
+  output: "export",
+};
+```
+
+## Accessibilité
+
+Le projet vise la conformité **RGAA 4.1** (Référentiel Général d'Amélioration de l'Accessibilité).
+
+- Langue déclarée : `lang="fr"`
+- Contrastes conformes WCAG AA minimum
+- Navigation clavier testée
+
+## Contribution
+
+1. Créer une branche : `git checkout -b feature/ma-fonctionnalite`
+2. Committer : `git commit -m "feat: description"`
+3. Pousser et ouvrir une Pull Request vers `main`
+
+Le hook pre-commit vérifie automatiquement le lint et le formatage.
