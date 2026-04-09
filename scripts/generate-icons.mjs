@@ -30,6 +30,4 @@ await sharp(svgBuffer)
   .toFile(join(root, "public", "favicon-32.png"));
 console.log("✓ public/favicon-32.png (rename/convert to .ico as needed)");
 
-console.log(
-  "\nNote: to produce a true .ico from the PNG, use a tool such as png2ico or icotool.",
-);
+console.log("\nNote: to produce a true .ico from the PNG, use a tool such as png2ico or icotool.");
