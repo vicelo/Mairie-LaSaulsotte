@@ -1,0 +1,21 @@
+import { PageLayout } from "@/components/layout/PageLayout";
+import { Breadcrumb } from "@/components/ui/Breadcrumb";
+import { getAllActualites } from "@/lib/actualites";
+import ActualitesClient from "./ActualitesClient";
+
+export default function ActualitesPage() {
+  const actualites = getAllActualites();
+
+  return (
+    <PageLayout>
+      <Breadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Actualités" }]} />
+
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold text-gray-900">Actualités</h1>
+        <p className="mt-2 text-gray-600">Toutes les informations de la commune de La Saulsotte.</p>
+      </div>
+
+      <ActualitesClient actualites={actualites} />
+    </PageLayout>
+  );
+}
