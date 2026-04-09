@@ -204,10 +204,10 @@ export default function HomePage() {
           aria-labelledby="hero-titre"
           className="relative isolate overflow-hidden bg-primary"
         >
-          {/* Photo de fond (placeholder Unsplash countryside) */}
+          {/* Illustration SVG du village */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=1600&q=80&auto=format&fit=crop"
+            src="/images/village.svg"
             alt=""
             aria-hidden="true"
             className="absolute inset-0 h-full w-full object-cover opacity-30"
@@ -288,6 +288,7 @@ export default function HomePage() {
                     href="tel:+33325700000"
                     className="rounded text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary"
                   >
+                    {/* TODO: vérifier numéro réel de la mairie de La Saulsotte */}
                     03 25 70 00 00
                   </a>
                 </p>
@@ -297,6 +298,7 @@ export default function HomePage() {
                     href="mailto:mairie@lasaulsotte.fr"
                     className="rounded text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary"
                   >
+                    {/* TODO: confirmer l'adresse email officielle */}
                     mairie@lasaulsotte.fr
                   </a>
                 </p>

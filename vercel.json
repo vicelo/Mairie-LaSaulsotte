@@ -11,6 +11,26 @@
       "permanent": true
     },
     {
+      "source": "/services/plu",
+      "destination": "/urbanisme",
+      "permanent": true
+    },
+    {
+      "source": "/services/urbanisme",
+      "destination": "/urbanisme",
+      "permanent": true
+    },
+    {
+      "source": "/services/eau-potable",
+      "destination": "/demarches",
+      "permanent": false
+    },
+    {
+      "source": "/services/etat-civil",
+      "destination": "/demarches",
+      "permanent": false
+    },
+    {
       "source": "/services/:path*",
       "destination": "/demarches",
       "permanent": false

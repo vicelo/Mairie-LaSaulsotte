@@ -185,7 +185,7 @@ export default function ContactPage() {
               <p>
                 Place de la Mairie
                 <br />
-                10 400 La Saulsotte
+                10150 La Saulsotte
               </p>
               <p>
                 Tél. :{" "}
@@ -193,6 +193,7 @@ export default function ContactPage() {
                   href="tel:+33325700000"
                   className="rounded text-primary underline hover:text-primary/80 focus:outline-none focus:ring-2 focus:ring-primary"
                 >
+                  {/* TODO: vérifier numéro réel de la mairie de La Saulsotte */}
                   03 25 70 00 00
                 </a>
               </p>
@@ -202,6 +203,7 @@ export default function ContactPage() {
                   href="mailto:mairie@lasaulsotte.fr"
                   className="rounded text-primary underline hover:text-primary/80 focus:outline-none focus:ring-2 focus:ring-primary"
                 >
+                  {/* TODO: confirmer l'adresse email officielle */}
                   mairie@lasaulsotte.fr
                 </a>
               </p>
