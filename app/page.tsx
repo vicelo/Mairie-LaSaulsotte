@@ -20,48 +20,53 @@ export const metadata: Metadata = {
   },
 };
 
-// ─── Mock data ───────────────────────────────────────────────────────────────
+// ─── Données réelles ─────────────────────────────────────────────────────────
 
 const ANNONCES = [
   {
-    id: "1",
-    texte: "Conseil municipal le 15 avril 2026 à 19h00 — Salle des fêtes",
+    id: "conseil-municipal-avril-2026",
+    texte:
+      "Conseil municipal du 8 avril 2026 — Budget primitif 2026 adopté à l'unanimité. Travaux de voirie programmés en mai.",
     href: "/actualites/conseil-municipal-avril-2026",
   },
   {
-    id: "2",
-    texte: "Collecte des déchets verts : jeudi 18 avril — Prévoir vos sacs avant 7h00",
+    id: "fete-village-2026",
+    texte:
+      "Fête du village — 28 juin 2026. Concours de boules, repas champêtre et bal populaire. Inscriptions en mairie.",
+    href: "/actualites/fete-village-2026",
   },
   {
-    id: "3",
-    texte: "La mairie sera fermée le vendredi 18 avril (Vendredi Saint)",
+    id: "travaux-voirie-mai-2026",
+    texte:
+      "Travaux — Chemin des Charmes (4–22 mai 2026). Circulation déviée pendant la durée du chantier.",
+    href: "/actualites/travaux-voirie-mai-2026",
   },
 ];
 
 const ACTUALITES = [
   {
     slug: "conseil-municipal-avril-2026",
-    title: "Conseil municipal — avril 2026",
+    title: "Conseil municipal du 8 avril 2026 — Compte rendu",
     excerpt:
-      "Le prochain conseil municipal se tiendra le mardi 15 avril à 19h00 en salle des fêtes. L'ordre du jour complet est disponible en mairie.",
-    date: "2026-04-09",
-    category: "Vie municipale",
+      "Budget 2026 adopté à l'unanimité, travaux de voirie programmés en mai, convention avec l'association sportive. Retrouvez le compte rendu complet.",
+    date: "2026-04-10",
+    category: "Informations municipales",
   },
   {
-    slug: "travaux-rue-de-la-paix",
-    title: "Travaux rue de la Paix : point d'avancement",
+    slug: "fete-village-2026",
+    title: "Fête du village — Inscriptions ouvertes",
     excerpt:
-      "Les travaux de réfection de la voirie progressent conformément au calendrier prévu. Fin des travaux estimée à fin mai 2026. Merci de votre compréhension.",
+      "La fête annuelle du village est de retour le 28 juin 2026. Concours de boules, repas champêtre, bal populaire — toute la commune est invitée !",
     date: "2026-04-05",
-    category: "Travaux",
+    category: "Événements locaux",
   },
   {
-    slug: "collecte-dechets-verts-printemps",
-    title: "Collecte des déchets verts : nouvelles dates",
+    slug: "travaux-voirie-mai-2026",
+    title: "Travaux de voirie — Chemin des Charmes",
     excerpt:
-      "Retrouvez le calendrier mis à jour de la collecte des déchets verts pour le printemps 2026. Les ramassages ont lieu le jeudi matin avant 7h00.",
-    date: "2026-04-01",
-    category: "Environnement",
+      "Des travaux de réfection débutent en mai 2026 sur le chemin des Charmes. Déviations en place pendant trois semaines.",
+    date: "2026-04-08",
+    category: "Travaux & urbanisme",
   },
 ];
 

@@ -1,21 +1,29 @@
 ---
-title: "Conseil municipal — avril 2026"
-excerpt: "Le prochain conseil municipal se tiendra le mardi 15 avril à 19h00 en salle des fêtes."
-date: "2026-04-09"
-category: "Vie municipale"
+title: "Conseil municipal du 8 avril 2026 — Compte rendu"
+date: "2026-04-10"
+categorie: "Informations municipales"
+resume: "Budget 2026 adopté à l'unanimité, travaux de voirie en mai, convention sportive approuvée."
 ---
 
-## Conseil municipal du 15 avril 2026
+# Conseil municipal du 8 avril 2026 — Compte rendu
 
-La prochaine réunion du conseil municipal se tiendra le **mardi 15 avril 2026 à 19h00** en salle des fêtes de La Saulsotte.
+_Publié le 10 avril 2026 — Informations municipales_
 
-### Ordre du jour
+Le conseil municipal de La Saulsotte s'est réuni en séance ordinaire le mardi 8 avril 2026, sous la présidence du Maire.
+
+## Ordre du jour
 
 1. Approbation du procès-verbal de la séance précédente
 2. Vote du budget primitif 2026
-3. Présentation du projet de rénovation de la voirie communale
+3. Point sur les travaux de voirie — chemin des Charmes
 4. Questions diverses
 
-La séance est ouverte au public. Tout habitant peut assister aux délibérations du conseil municipal.
+## Délibérations
 
-Pour plus d'informations, contactez la mairie au **03 25 70 00 00**.
+**Budget primitif 2026** — Adopté à l'unanimité. Les priorités d'investissement portent sur la réfection de la voirie communale, la rénovation énergétique de la salle des fêtes et l'entretien du cimetière.
+
+**Voirie** — Les travaux du chemin des Charmes sont programmés pour début mai 2026, durée estimée trois semaines.
+
+**Questions diverses** — Approbation de la convention de mise à disposition des locaux communaux à l'association sportive locale.
+
+_Le compte rendu complet est disponible en mairie. [Nous contacter](/contact)._
