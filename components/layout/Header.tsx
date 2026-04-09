@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { LogoMairie } from "../ui/LogoMairie";
 
 const NAV_ITEMS = [
@@ -24,6 +25,7 @@ export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
   const hamburgerRef = useRef<HTMLButtonElement>(null);
+  const pathname = usePathname();
 
   // Ferme le menu sur Escape
   useEffect(() => {
@@ -82,16 +84,20 @@ export function Header() {
 
           {/* Navigation desktop */}
           <ul className="hidden items-center gap-1 md:flex" role="list">
-            {NAV_ITEMS.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className="rounded px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-primary-100 hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
+            {NAV_ITEMS.map((item) => {
+              const isCurrent = pathname === item.href;
+              return (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    aria-current={isCurrent ? "page" : undefined}
+                    className="rounded px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-primary-100 hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
 
           {/* Bouton hamburger mobile */}
@@ -150,17 +156,21 @@ export function Header() {
           className={`border-t border-gray-100 bg-white md:hidden ${menuOpen ? "block" : "hidden"}`}
         >
           <ul className="flex flex-col px-4 pb-4 pt-2" role="list">
-            {NAV_ITEMS.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  onClick={() => setMenuOpen(false)}
-                  className="block rounded px-3 py-3 text-base font-medium text-gray-700 transition-colors hover:bg-primary-100 hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
+            {NAV_ITEMS.map((item) => {
+              const isCurrent = pathname === item.href;
+              return (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    aria-current={isCurrent ? "page" : undefined}
+                    onClick={() => setMenuOpen(false)}
+                    className="block rounded px-3 py-3 text-base font-medium text-gray-700 transition-colors hover:bg-primary-100 hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </header>

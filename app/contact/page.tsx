@@ -5,11 +5,43 @@ import { PageLayout } from "@/components/layout/PageLayout";
 import { Button } from "@/components/ui/Button";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 
+interface FormErrors {
+  nom?: string;
+  email?: string;
+  message?: string;
+}
+
 export default function ContactPage() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [errors, setErrors] = useState<FormErrors>({});
+
+  function validate(form: HTMLFormElement): FormErrors {
+    const data = new FormData(form);
+    const errs: FormErrors = {};
+    if (!String(data.get("nom") ?? "").trim()) {
+      errs.nom = "Veuillez saisir votre nom et prénom.";
+    }
+    const email = String(data.get("email") ?? "").trim();
+    if (!email) {
+      errs.email = "Veuillez saisir votre adresse email.";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errs.email = "Veuillez saisir une adresse email valide.";
+    }
+    if (!String(data.get("message") ?? "").trim()) {
+      errs.message = "Veuillez saisir votre message.";
+    }
+    return errs;
+  }
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const form = e.currentTarget;
+    const errs = validate(form);
+    if (Object.keys(errs).length > 0) {
+      setErrors(errs);
+      return;
+    }
+    setErrors({});
     setStatus("submitting");
     // Simulation d'envoi (pas de backend dans ce prototype)
     setTimeout(() => {
@@ -58,8 +90,15 @@ export default function ContactPage() {
                   required
                   autoComplete="name"
                   aria-required="true"
+                  aria-invalid={errors.nom ? true : undefined}
+                  aria-describedby={errors.nom ? "nom-error" : undefined}
                   className="block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary"
                 />
+                {errors.nom && (
+                  <p id="nom-error" role="alert" className="mt-1 text-xs text-red-600">
+                    {errors.nom}
+                  </p>
+                )}
               </div>
 
               <div>
@@ -73,8 +112,15 @@ export default function ContactPage() {
                   required
                   autoComplete="email"
                   aria-required="true"
+                  aria-invalid={errors.email ? true : undefined}
+                  aria-describedby={errors.email ? "email-error" : undefined}
                   className="block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary"
                 />
+                {errors.email && (
+                  <p id="email-error" role="alert" className="mt-1 text-xs text-red-600">
+                    {errors.email}
+                  </p>
+                )}
               </div>
 
               <div>
@@ -105,8 +151,15 @@ export default function ContactPage() {
                   required
                   rows={5}
                   aria-required="true"
+                  aria-invalid={errors.message ? true : undefined}
+                  aria-describedby={errors.message ? "message-error" : undefined}
                   className="block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary"
                 />
+                {errors.message && (
+                  <p id="message-error" role="alert" className="mt-1 text-xs text-red-600">
+                    {errors.message}
+                  </p>
+                )}
               </div>
 
               <p className="text-xs text-gray-500">
@@ -171,7 +224,7 @@ export default function ContactPage() {
               </div>
               <div className="flex justify-between gap-4">
                 <dt className="font-medium">Samedi &amp; Dimanche</dt>
-                <dd className="text-gray-400">Fermé</dd>
+                <dd className="text-gray-500">Fermé</dd>
               </div>
             </dl>
           </section>

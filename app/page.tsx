@@ -277,7 +277,7 @@ export default function HomePage() {
                 </div>
                 <div className="flex justify-between gap-4">
                   <dt className="font-medium">Samedi &amp; Dimanche</dt>
-                  <dd className="text-gray-400">Fermé</dd>
+                  <dd className="text-gray-500">Fermé</dd>
                 </div>
               </dl>
 
@@ -314,6 +314,7 @@ export default function HomePage() {
               </h2>
               <Link
                 href="/actualites"
+                aria-label="Voir toutes les actualités"
                 className="rounded text-sm font-medium text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary"
               >
                 Voir toutes les actualités →

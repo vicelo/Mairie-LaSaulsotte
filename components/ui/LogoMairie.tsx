@@ -21,7 +21,6 @@ export function LogoMairie({ className = "h-8 w-8", monochrome = false }: LogoMa
       className={className}
       aria-hidden="true"
       focusable="false"
-      role="img"
     >
       {/* Fond arrondi */}
       <rect width="64" height="64" rx="12" fill={fill3} />
