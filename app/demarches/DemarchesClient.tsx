@@ -2,8 +2,16 @@
 
 import { useState } from "react";
 import { Badge } from "@/components/ui/Badge";
-import { CATEGORIES_DEMARCHES } from "@/lib/demarches";
 import type { Demarche } from "@/lib/demarches";
+
+const CATEGORIES_DEMARCHES = [
+  "Toutes",
+  "État civil",
+  "Urbanisme",
+  "Élections",
+  "Social",
+  "Autres",
+] as const;
 
 const CATEGORY_BADGE_COLORS: Record<string, "green" | "blue" | "orange" | "gray"> = {
   "État civil": "blue",

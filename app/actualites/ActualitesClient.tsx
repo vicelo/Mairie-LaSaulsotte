@@ -2,8 +2,17 @@
 
 import { useState } from "react";
 import { Card } from "@/components/ui/Card";
-import { CATEGORIES } from "@/lib/actualites";
 import type { Actualite } from "@/lib/actualites";
+
+const CATEGORIES = [
+  "Toutes",
+  "Vie municipale",
+  "Travaux",
+  "Environnement",
+  "Culture",
+  "Social",
+  "Autres",
+] as const;
 
 const ITEMS_PER_PAGE = 6;
 
