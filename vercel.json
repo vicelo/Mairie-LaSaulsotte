@@ -1,0 +1,38 @@
+{
+  "redirects": [
+    {
+      "source": "/services/demarches",
+      "destination": "/demarches",
+      "permanent": true
+    },
+    {
+      "source": "/services/urgences",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/services/:path*",
+      "destination": "/demarches",
+      "permanent": false
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    }
+  ]
+}

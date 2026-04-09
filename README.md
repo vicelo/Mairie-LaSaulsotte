@@ -93,19 +93,44 @@ Le pipeline GitHub Actions (`.github/workflows/ci.yml`) exécute à chaque push/
 1. **Lint** — ESLint + vérification Prettier
 2. **TypeScript** — `tsc --noEmit`
 3. **Build** — `next build` (dépend du lint)
+4. **Deploy** — déploiement automatique sur Vercel (uniquement sur `main`, conditionnel à la présence du secret `VERCEL_TOKEN`)
 
-## Hébergement cible
+## Déploiement
 
-OVH / Infomaniak (export statique ou Node.js). **Pas de Vercel.**
+### Secrets GitHub requis
 
-Pour un export statique :
+Configurer dans **Settings → Secrets and variables → Actions** du dépôt :
 
-```js
-// next.config.mjs
-const nextConfig = {
-  output: "export",
-};
-```
+| Secret              | Description                                          |
+| ------------------- | ---------------------------------------------------- |
+| `VERCEL_TOKEN`      | Token API Vercel (Account Settings → Tokens)         |
+| `VERCEL_ORG_ID`     | ID de l'organisation Vercel (`.vercel/project.json`) |
+| `VERCEL_PROJECT_ID` | ID du projet Vercel (`.vercel/project.json`)         |
+
+> Sans ces secrets, le job `deploy` est ignoré et la CI reste verte.
+
+### Domaine `lasaulsotte.fr` sur Vercel
+
+1. Dans le dashboard Vercel, ouvrir le projet → **Settings → Domains**
+2. Ajouter `lasaulsotte.fr` et `www.lasaulsotte.fr`
+3. Mettre à jour les DNS chez le registrar :
+   - `A` → `76.76.21.21` (adresse Vercel)
+   - `CNAME www` → `cname.vercel-dns.com`
+4. Vercel provisionne automatiquement le certificat TLS (Let's Encrypt)
+
+### OAuth App GitHub pour Decap CMS
+
+L'interface d'administration (`/admin`) utilise Decap CMS avec authentification PKCE directe GitHub — aucun serveur OAuth requis.
+
+Pour activer la connexion :
+
+1. Aller sur **GitHub → Settings → Developer settings → OAuth Apps → New OAuth App**
+2. Renseigner :
+   - **Application name** : `Mairie La Saulsotte CMS`
+   - **Homepage URL** : `https://lasaulsotte.fr`
+   - **Authorization callback URL** : `https://lasaulsotte.fr/admin/`
+3. Copier le **Client ID** généré
+4. Dans `public/admin/config.yml`, décommenter et renseigner `app_id` avec ce Client ID
 
 ## Accessibilité
 

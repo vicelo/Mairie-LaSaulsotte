@@ -10,10 +10,11 @@
 
 backend:
   name: github
-  repo: agentia/mairie-lasaulsotte   # À adapter selon le dépôt réel
+  repo: vicelo/Mairie-LaSaulsotte
   branch: main
   auth_type: pkce
   base_url: https://api.github.com
+  # app_id: VOTRE_CLIENT_ID  # Configurer avec l'ID de l'OAuth App GitHub (Settings > Developer settings > OAuth Apps)
 
 # Pour le développement local, décommenter la ligne suivante et lancer :
 #   npx decap-server
