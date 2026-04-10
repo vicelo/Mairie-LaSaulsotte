@@ -108,7 +108,7 @@ export function Header() {
             aria-expanded={menuOpen}
             aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
             onClick={() => setMenuOpen((prev) => !prev)}
-            className="inline-flex items-center justify-center rounded-md p-2 text-gray-600 transition-colors hover:bg-primary-100 hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 md:hidden"
+            className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md p-2.5 text-gray-600 transition-colors hover:bg-primary-100 hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 md:hidden"
           >
             <span className="sr-only">{menuOpen ? "Fermer" : "Menu"}</span>
             {menuOpen ? (

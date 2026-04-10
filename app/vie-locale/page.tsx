@@ -241,10 +241,18 @@ export default function VieLocalePage() {
           <table className="min-w-full divide-y divide-gray-200 bg-white text-sm">
             <thead>
               <tr className="bg-gray-50">
-                <th className="px-4 py-3 text-left font-semibold text-gray-700">Ligne</th>
-                <th className="px-4 py-3 text-left font-semibold text-gray-700">Trajet</th>
-                <th className="px-4 py-3 text-left font-semibold text-gray-700">Horaires</th>
-                <th className="px-4 py-3 text-left font-semibold text-gray-700">Opérateur</th>
+                <th scope="col" className="px-4 py-3 text-left font-semibold text-gray-700">
+                  Ligne
+                </th>
+                <th scope="col" className="px-4 py-3 text-left font-semibold text-gray-700">
+                  Trajet
+                </th>
+                <th scope="col" className="px-4 py-3 text-left font-semibold text-gray-700">
+                  Horaires
+                </th>
+                <th scope="col" className="px-4 py-3 text-left font-semibold text-gray-700">
+                  Opérateur
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">

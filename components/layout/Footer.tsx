@@ -56,7 +56,7 @@ export function Footer() {
 
           {/* Plan du site */}
           <nav aria-label="Plan du site">
-            <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-400">
+            <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-700">
               Plan du site
             </h2>
             <ul className="space-y-2" role="list">
@@ -64,7 +64,7 @@ export function Footer() {
                 <li key={lien.href}>
                   <Link
                     href={lien.href}
-                    className="rounded text-sm text-gray-600 hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary"
+                    className="rounded text-sm text-gray-700 hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary"
                   >
                     {lien.label}
                   </Link>
@@ -75,7 +75,7 @@ export function Footer() {
 
           {/* Informations légales */}
           <nav aria-label="Informations légales">
-            <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-400">
+            <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-700">
               Informations légales
             </h2>
             <ul className="space-y-2" role="list">
@@ -83,7 +83,7 @@ export function Footer() {
                 <li key={lien.href}>
                   <Link
                     href={lien.href}
-                    className="rounded text-sm text-gray-600 hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary"
+                    className="rounded text-sm text-gray-700 hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary"
                   >
                     {lien.label}
                   </Link>
@@ -94,7 +94,7 @@ export function Footer() {
 
           {/* Horaires */}
           <div>
-            <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-400">
+            <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-700">
               Horaires d&apos;ouverture
             </h2>
             <dl className="space-y-1 text-sm text-gray-600">
