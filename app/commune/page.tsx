@@ -27,7 +27,7 @@ export default function CommunePage() {
           <p className="text-gray-700">
             Située dans la plaine champenoise, La Saulsotte est un village rural à taille humaine.
             Code postal : <strong>10400</strong>. La commune fait partie de la communauté de
-            communes de l&apos;Orvin et de l&apos;Ardusson.
+            communes du Nogentais.
           </p>
         </section>
 
@@ -36,11 +36,11 @@ export default function CommunePage() {
           <dl className="space-y-2 text-sm">
             <div className="flex justify-between gap-4 border-b border-gray-100 pb-2">
               <dt className="font-medium text-gray-700">Population</dt>
-              <dd className="text-gray-900">~150 habitants</dd>
+              <dd className="text-gray-900">677 habitants (2023)</dd>
             </div>
             <div className="flex justify-between gap-4 border-b border-gray-100 pb-2">
               <dt className="font-medium text-gray-700">Superficie</dt>
-              <dd className="text-gray-900">8,6 km²</dd>
+              <dd className="text-gray-900">18,93 km²</dd>
             </div>
             <div className="flex justify-between gap-4 border-b border-gray-100 pb-2">
               <dt className="font-medium text-gray-700">Département</dt>

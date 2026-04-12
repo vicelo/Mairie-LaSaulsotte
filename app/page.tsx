@@ -10,7 +10,7 @@ import { Card } from "@/components/ui/Card";
 export const metadata: Metadata = {
   title: "Mairie de La Saulsotte — Commune de l'Aube (10)",
   description:
-    "Site officiel de la mairie de La Saulsotte, commune de l'Aube (10), 150 habitants. Retrouvez les informations pratiques, les actualités et les services aux habitants.",
+    "Site officiel de la mairie de La Saulsotte, commune de l'Aube (10), 677 habitants (2023). Retrouvez les informations pratiques, les actualités et les services aux habitants.",
   openGraph: {
     title: "Mairie de La Saulsotte — Commune de l'Aube (10)",
     description:
@@ -236,7 +236,7 @@ export default function HomePage() {
               >
                 Commune de La Saulsotte
               </h1>
-              <p className="mt-3 text-lg text-primary-100/90">Aube (10) — 150 habitants</p>
+              <p className="mt-3 text-lg text-primary-100/90">Aube (10) — 677 habitants (2023)</p>
 
               {/* CTAs rapides */}
               <div className="mt-8 flex flex-wrap gap-3">
