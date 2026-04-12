@@ -2,9 +2,8 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import { PROJETS } from "@/content/projets";
 import { KPIBand } from "@/components/projets/KPIBand";
-import { ProjectCard } from "@/components/projets/ProjectCard";
 import { ProjectFilters } from "@/components/projets/ProjectFilters";
-import type { ProjetStatut, ProjetCategorie } from "@/content/projets";
+import { ProjectList } from "@/components/projets/ProjectList";
 
 export const metadata: Metadata = {
   title: "Suivi des projets communaux — Mairie de La Saulsotte",
@@ -12,19 +11,7 @@ export const metadata: Metadata = {
     "Tableau de bord des projets en cours, planifiés et terminés de la commune de La Saulsotte (Aube).",
 };
 
-interface ProjetsPageProps {
-  searchParams: Promise<{ status?: string; cat?: string }>;
-}
-
-export default async function ProjetsPage({ searchParams }: ProjetsPageProps) {
-  const { status, cat } = await searchParams;
-
-  const filtered = PROJETS.filter((p) => {
-    if (status && p.statut !== (status as ProjetStatut)) return false;
-    if (cat && p.categorie !== (cat as ProjetCategorie)) return false;
-    return true;
-  });
-
+export default function ProjetsPage() {
   const updatedDate = new Date().toLocaleDateString("fr-FR", {
     day: "numeric",
     month: "long",
@@ -66,17 +53,9 @@ export default async function ProjetsPage({ searchParams }: ProjetsPageProps) {
       </Suspense>
 
       {/* Résultats */}
-      {filtered.length === 0 ? (
-        <p className="py-10 text-center text-gray-500">
-          Aucun projet ne correspond aux filtres sélectionnés.
-        </p>
-      ) : (
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-          {filtered.map((projet) => (
-            <ProjectCard key={projet.id} projet={projet} />
-          ))}
-        </div>
-      )}
+      <Suspense fallback={null}>
+        <ProjectList projets={PROJETS} />
+      </Suspense>
     </main>
   );
 }
