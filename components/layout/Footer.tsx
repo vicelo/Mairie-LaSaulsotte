@@ -99,7 +99,7 @@ export function Footer() {
             </h2>
             <dl className="space-y-1 text-sm text-gray-600">
               <div className="flex justify-between gap-4">
-                <dt>Lun &amp; Mar</dt>
+                <dt>Lun &amp; Mer</dt>
                 <dd>16h00 – 19h30</dd>
               </div>
               <div className="flex justify-between gap-4">

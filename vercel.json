@@ -31,7 +31,7 @@
       "permanent": false
     },
     {
-      "source": "/services/:path*",
+      "source": "/services/:path+",
       "destination": "/demarches",
       "permanent": false
     }

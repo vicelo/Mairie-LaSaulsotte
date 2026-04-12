@@ -33,8 +33,8 @@ export default function DemarchesPage() {
 
       {/* Encart info pratique */}
       <div className="mb-8 rounded-xl border border-primary-100 bg-primary-100 p-4 text-sm text-primary">
-        <strong>Accueil en mairie :</strong> lundi et mardi de 16h à 19h30, vendredi de 16h à 18h30,
-        samedi de 9h30 à 11h30. Tél.{" "}
+        <strong>Accueil en mairie :</strong> lundi et mercredi de 16h à 19h30, vendredi de 16h à
+        18h30, samedi de 9h30 à 11h30. Tél.{" "}
         <a
           href="tel:+33325398228"
           className="rounded underline hover:text-primary/80 focus:outline-none focus:ring-2 focus:ring-primary"
