@@ -26,7 +26,7 @@ export default function CommunePage() {
           <h2 className="mb-3 text-xl font-semibold text-gray-900">Présentation</h2>
           <p className="text-gray-700">
             Située dans la plaine champenoise, La Saulsotte est un village rural à taille humaine.
-            Code postal : <strong>10150</strong>. La commune fait partie de la communauté de
+            Code postal : <strong>10400</strong>. La commune fait partie de la communauté de
             communes de l&apos;Orvin et de l&apos;Ardusson.
           </p>
         </section>

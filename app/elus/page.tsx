@@ -8,12 +8,21 @@ export const metadata: Metadata = {
 };
 
 const ELUS = [
-  { nom: "Jean-Pierre Martin", fonction: "Maire", depuis: "2020" },
-  { nom: "Marie Dupont", fonction: "1ère Adjointe", depuis: "2020" },
-  { nom: "Paul Renard", fonction: "2ème Adjoint", depuis: "2020" },
-  { nom: "Sophie Bernard", fonction: "Conseillère municipale", depuis: "2020" },
-  { nom: "Luc Morel", fonction: "Conseiller municipal", depuis: "2020" },
-  { nom: "Claire Simon", fonction: "Conseillère municipale", depuis: "2020" },
+  { nom: "Gérard DELORME", fonction: "Maire", depuis: "2020" },
+  { nom: "Michelle MONOS", fonction: "1ère Adjointe", depuis: "2020" },
+  { nom: "Philippe LE CROM", fonction: "2ème Adjoint", depuis: "2020" },
+  { nom: "Robert DUPONT", fonction: "3ème Adjoint", depuis: "2020" },
+  { nom: "Stéphane DELVRIE", fonction: "Conseiller municipal", depuis: "2020" },
+  { nom: "Laure FORTUNÉ", fonction: "Conseillère municipale", depuis: "2020" },
+  { nom: "Christian GIRAULT", fonction: "Conseiller municipal", depuis: "2020" },
+  { nom: "Fabienne IRDEL", fonction: "Conseillère municipale", depuis: "2020" },
+  { nom: "Sylvie LIVIN", fonction: "Conseillère municipale", depuis: "2020" },
+  { nom: "Patrick MARTINEAU", fonction: "Conseiller municipal", depuis: "2020" },
+  { nom: "Noël MATTHYS", fonction: "Conseiller municipal", depuis: "2020" },
+  { nom: "Patricia MAUCLAIR", fonction: "Conseillère municipale", depuis: "2020" },
+  { nom: "Guy PASQUET", fonction: "Conseiller municipal", depuis: "2020" },
+  { nom: "Brigitte VAILLANT", fonction: "Conseillère municipale", depuis: "2020" },
+  { nom: "Dominique VIARD", fonction: "Conseiller municipal", depuis: "2020" },
 ];
 
 export default function ElusPage() {
@@ -24,8 +33,8 @@ export default function ElusPage() {
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900">Vos Élus</h1>
         <p className="mt-2 text-gray-600">
-          Le conseil municipal de La Saulsotte est composé de 11 élus issus des élections
-          municipales de 2020.
+          Le conseil municipal de La Saulsotte est composé de 15 élus (1 maire, 3 adjoints et 11
+          conseillers municipaux) issus des élections municipales de 2020.
         </p>
       </div>
 
@@ -44,11 +53,6 @@ export default function ElusPage() {
             <p className="mt-1 text-xs text-gray-500">En mandat depuis {elu.depuis}</p>
           </div>
         ))}
-      </div>
-
-      <div className="bg-primary-50 mt-8 rounded-xl border border-primary-100 p-4 text-sm text-primary-700">
-        <strong>Note :</strong> Les informations sur les élus sont en cours de finalisation et
-        seront complétées avant la mise en production.
       </div>
     </PageLayout>
   );

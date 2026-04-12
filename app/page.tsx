@@ -273,15 +273,19 @@ export default function HomePage() {
 
               <dl className="mt-5 space-y-2 text-sm text-gray-700">
                 <div className="flex justify-between gap-4 border-b border-gray-200 pb-2">
-                  <dt className="font-medium">Lundi – Vendredi</dt>
-                  <dd>9h00 – 12h00</dd>
+                  <dt className="font-medium">Lundi &amp; Mercredi</dt>
+                  <dd>16h00 – 19h30</dd>
                 </div>
                 <div className="flex justify-between gap-4 border-b border-gray-200 pb-2">
-                  <dt className="font-medium">Lundi &amp; Mercredi</dt>
-                  <dd>14h00 – 17h00</dd>
+                  <dt className="font-medium">Vendredi</dt>
+                  <dd>16h00 – 18h30</dd>
+                </div>
+                <div className="flex justify-between gap-4 border-b border-gray-200 pb-2">
+                  <dt className="font-medium">Samedi</dt>
+                  <dd>9h30 – 11h30</dd>
                 </div>
                 <div className="flex justify-between gap-4">
-                  <dt className="font-medium">Samedi &amp; Dimanche</dt>
+                  <dt className="font-medium">Mardi &amp; Jeudi &amp; Dimanche</dt>
                   <dd className="text-gray-500">Fermé</dd>
                 </div>
               </dl>
@@ -290,21 +294,19 @@ export default function HomePage() {
                 <p>
                   <span className="font-medium text-gray-600">Tél. :</span>{" "}
                   <a
-                    href="tel:+33325700000"
+                    href="tel:+33325398228"
                     className="rounded text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary"
                   >
-                    {/* TODO: vérifier numéro réel de la mairie de La Saulsotte */}
-                    03 25 70 00 00
+                    03 25 39 82 28
                   </a>
                 </p>
                 <p>
                   <span className="font-medium text-gray-600">Email :</span>{" "}
                   <a
-                    href="mailto:mairie@lasaulsotte.fr"
+                    href="mailto:sg.mairie@lasaulsotte.fr"
                     className="rounded text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary"
                   >
-                    {/* TODO: confirmer l'adresse email officielle */}
-                    mairie@lasaulsotte.fr
+                    sg.mairie@lasaulsotte.fr
                   </a>
                 </p>
               </div>
