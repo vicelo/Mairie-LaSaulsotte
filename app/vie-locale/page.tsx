@@ -84,8 +84,8 @@ const SERVICES = [
     ),
     description:
       "Location de la salle des fêtes pour vos événements privés ou associatifs. Capacité 100 personnes assises, cuisine équipée.",
-    adresse: "Place de la Mairie, La Saulsotte",
-    contact: "03 25 70 00 00",
+    adresse: "10 Rue Pavée, 10400 La Saulsotte",
+    contact: "03 25 39 82 28",
   },
   {
     titre: "Bibliothèque municipale",
@@ -108,7 +108,7 @@ const SERVICES = [
     description:
       "Fond de 2 000 ouvrages accessible aux habitants. Prêt gratuit sur présentation d'une pièce d'identité. Ouverte le samedi matin.",
     adresse: "Annexe de la mairie, La Saulsotte",
-    contact: "03 25 70 00 00",
+    contact: "03 25 39 82 28",
   },
   {
     titre: "Terrain de sport",

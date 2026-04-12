@@ -53,11 +53,6 @@ export default function CommunePage() {
           </dl>
         </section>
       </div>
-
-      <div className="bg-primary-50 mt-8 rounded-xl border border-primary-100 p-4 text-sm text-primary-700">
-        <strong>Note :</strong> Cette page est en cours de développement. Des informations
-        complémentaires (histoire, patrimoine, associations) seront ajoutées prochainement.
-      </div>
     </PageLayout>
   );
 }

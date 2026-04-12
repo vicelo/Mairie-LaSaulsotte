@@ -118,27 +118,14 @@ export default function UrbanismePage() {
           ))}
         </div>
 
-        <div className="flex flex-wrap gap-3">
-          <a
-            href="#"
-            className="inline-flex items-center gap-2 rounded-md border border-primary bg-white px-4 py-2 text-sm font-medium text-primary transition-colors hover:bg-primary-100 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-          >
-            <svg
-              aria-hidden="true"
-              className="h-4 w-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-              />
-            </svg>
-            Télécharger le PLU (PDF)
+        <div className="mb-4 rounded-lg border border-blue-100 bg-blue-50 p-3 text-sm text-blue-800">
+          Le document PLU est consultable et disponible sur demande en mairie — 10 Rue Pavée,{" "}
+          <a href="tel:+33325398228" className="underline hover:text-blue-900">
+            03 25 39 82 28
           </a>
+          .
+        </div>
+        <div className="flex flex-wrap gap-3">
           <a
             href="https://www.geoportail.gouv.fr"
             target="_blank"
@@ -196,10 +183,10 @@ export default function UrbanismePage() {
           de réception vous sera remis immédiatement. Pour tout conseil préalable, contactez le
           service urbanisme au{" "}
           <a
-            href="tel:+33325700000"
+            href="tel:+33325398228"
             className="rounded underline hover:text-primary/80 focus:outline-none focus:ring-2 focus:ring-primary"
           >
-            03 25 70 00 00
+            03 25 39 82 28
           </a>
           .
         </div>

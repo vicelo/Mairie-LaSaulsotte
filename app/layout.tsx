@@ -38,20 +38,32 @@ const jsonLd = {
   "@type": "GovernmentBuilding",
   name: "Mairie de La Saulsotte",
   url: "https://www.mairie-lasaulsotte.fr",
-  telephone: "+33-3-25-21-82-11",
+  telephone: "+33-3-25-39-82-28",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "1 Grande Rue",
+    streetAddress: "10 Rue Pavée",
     addressLocality: "La Saulsotte",
-    postalCode: "10150",
+    postalCode: "10400",
     addressCountry: "FR",
   },
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      opens: "09:00",
-      closes: "12:00",
+      dayOfWeek: ["Monday", "Tuesday"],
+      opens: "16:00",
+      closes: "19:30",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Friday"],
+      opens: "16:00",
+      closes: "18:30",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Saturday"],
+      opens: "09:30",
+      closes: "11:30",
     },
   ],
 };

@@ -43,10 +43,16 @@ export default function ContactClient() {
     }
     setErrors({});
     setStatus("submitting");
-    // Simulation d'envoi (pas de backend dans ce prototype)
-    setTimeout(() => {
-      setStatus("success");
-    }, 1200);
+    const data = new FormData(form);
+    const nom = String(data.get("nom") ?? "").trim();
+    const email = String(data.get("email") ?? "").trim();
+    const sujet = String(data.get("sujet") ?? "").trim();
+    const message = String(data.get("message") ?? "").trim();
+    const sujetLabel = sujet || "Demande via site mairie";
+    const corps = `Nom : ${nom}\nEmail : ${email}\nSujet : ${sujetLabel}\n\n${message}`;
+    const mailto = `mailto:sg.mairie@lasaulsotte.fr?subject=${encodeURIComponent(sujetLabel)}&body=${encodeURIComponent(corps)}`;
+    window.location.href = mailto;
+    setStatus("success");
   }
 
   return (

@@ -34,22 +34,22 @@ export function Footer() {
               <span className="text-sm font-semibold text-gray-700">Mairie de La Saulsotte</span>
             </div>
             <address className="text-sm not-italic leading-relaxed text-gray-500">
-              Place de la Mairie
+              10 Rue Pavée
               <br />
-              10 400 La Saulsotte
+              10400 La Saulsotte
               <br />
               <a
-                href="tel:+33325700000"
+                href="tel:+33325398228"
                 className="rounded hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary"
               >
-                03 25 70 00 00
+                03 25 39 82 28
               </a>
               <br />
               <a
-                href="mailto:mairie@lasaulsotte.fr"
+                href="mailto:sg.mairie@lasaulsotte.fr"
                 className="rounded hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary"
               >
-                mairie@lasaulsotte.fr
+                sg.mairie@lasaulsotte.fr
               </a>
             </address>
           </div>
@@ -99,16 +99,16 @@ export function Footer() {
             </h2>
             <dl className="space-y-1 text-sm text-gray-600">
               <div className="flex justify-between gap-4">
-                <dt>Lun – Ven</dt>
-                <dd>9h00 – 12h00</dd>
+                <dt>Lun &amp; Mar</dt>
+                <dd>16h00 – 19h30</dd>
               </div>
               <div className="flex justify-between gap-4">
-                <dt>Lun & Mer</dt>
-                <dd>14h00 – 17h00</dd>
+                <dt>Ven</dt>
+                <dd>16h00 – 18h30</dd>
               </div>
               <div className="flex justify-between gap-4">
                 <dt>Sam</dt>
-                <dd>Fermé</dd>
+                <dd>9h30 – 11h30</dd>
               </div>
             </dl>
           </div>
