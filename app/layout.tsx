@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.mairie-lasaulsotte.fr"),
+  metadataBase: new URL("https://lasaulsotte.fr"),
   title: {
     default: "Mairie de La Saulsotte",
     template: "%s | Mairie de La Saulsotte",
@@ -37,7 +37,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "GovernmentBuilding",
   name: "Mairie de La Saulsotte",
-  url: "https://www.mairie-lasaulsotte.fr",
+  url: "https://lasaulsotte.fr",
   telephone: "+33-3-25-39-82-28",
   address: {
     "@type": "PostalAddress",

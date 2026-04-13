@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 
 import { getAllActualites } from "@/lib/actualites";
 
-const BASE_URL = "https://www.mairie-lasaulsotte.fr";
+const BASE_URL = "https://lasaulsotte.fr";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
