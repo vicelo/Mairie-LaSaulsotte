@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 72" role="img" aria-label="Mairie de La Saulsotte">
+  <title>Mairie de La Saulsotte</title>
+
+  <!-- Blason stylisé -->
+  <!-- Fond du bouclier -->
+  <path d="M6 4 L44 4 L44 34 Q44 54 25 62 Q6 54 6 34 Z" fill="#2a6010"/>
+  <!-- Intérieur du bouclier (ombre) -->
+  <path d="M11 9 L39 9 L39 34 Q39 50 25 57 Q11 50 11 34 Z" fill="#1e4a0c"/>
+
+  <!-- Motif saule stylisé (feuilles de saule en orange) -->
+  <!-- Tige centrale -->
+  <line x1="25" y1="52" x2="25" y2="14" stroke="#4a8a20" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Feuilles gauche -->
+  <path d="M25 44 Q17 38 16 30 Q21 34 25 42Z" fill="#f89522"/>
+  <path d="M25 36 Q18 30 18 23 Q22 27 25 34Z" fill="#f89522" opacity="0.85"/>
+  <path d="M25 27 Q19 22 20 16 Q23 19 25 25Z" fill="#f89522" opacity="0.6"/>
+  <!-- Feuilles droite -->
+  <path d="M25 44 Q33 38 34 30 Q29 34 25 42Z" fill="#f89522"/>
+  <path d="M25 36 Q32 30 32 23 Q28 27 25 34Z" fill="#f89522" opacity="0.85"/>
+  <path d="M25 27 Q31 22 30 16 Q27 19 25 25Z" fill="#f89522" opacity="0.6"/>
+
+  <!-- Texte -->
+  <!-- "MAIRIE DE" — lettres espacées, petite taille -->
+  <text
+    x="58"
+    y="26"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="11"
+    font-weight="400"
+    letter-spacing="3"
+    fill="#555555"
+  >MAIRIE DE</text>
+
+  <!-- "La Saulsotte" — grand, en vert -->
+  <text
+    x="56"
+    y="50"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="22"
+    font-weight="700"
+    fill="#2a6010"
+  >La Saulsotte</text>
+
+  <!-- Ligne décorative orange -->
+  <line x1="56" y1="57" x2="276" y2="57" stroke="#f89522" stroke-width="2" stroke-linecap="round"/>
+</svg>

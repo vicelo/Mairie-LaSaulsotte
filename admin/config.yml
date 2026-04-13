@@ -1,0 +1,178 @@
+# ─── Decap CMS — Mairie de La Saulsotte ─────────────────────────────────────
+#
+# Backend GitHub (PAT / OAuth PKCE)
+# Configurer la variable d'environnement NEXT_PUBLIC_CMS_REPO avec owner/repo
+# Exemple : agentia/mairie-lasaulsotte
+#
+# Auth :
+#   - Développement local : local_backend: true (proxy sur port 8081)
+#   - Production          : auth_type pkce (aucun serveur requis)
+
+backend:
+  name: github
+  repo: vicelo/Mairie-LaSaulsotte
+  branch: main
+  auth_type: pkce
+  base_url: https://api.github.com
+  # app_id: VOTRE_CLIENT_ID  # Configurer avec l'ID de l'OAuth App GitHub (Settings > Developer settings > OAuth Apps)
+
+# Pour le développement local, décommenter la ligne suivante et lancer :
+#   npx decap-server
+# local_backend: true
+
+# ─── Médias ──────────────────────────────────────────────────────────────────
+
+media_folder: public/images/uploads
+public_folder: /images/uploads
+
+# ─── Interface ───────────────────────────────────────────────────────────────
+
+locale: fr
+site_url: https://lasaulsotte.fr
+display_url: https://lasaulsotte.fr
+
+# ─── Collections ─────────────────────────────────────────────────────────────
+
+collections:
+
+  # ── Actualités ─────────────────────────────────────────────────────────────
+  - name: actualites
+    label: Actualités
+    label_singular: Actualité
+    folder: content/actualites
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    preview_path: "/actualites/{{slug}}"
+    summary: "{{title}} — {{date}}"
+    sortable_fields: [date, title]
+    fields:
+      - label: Titre
+        name: title
+        widget: string
+        hint: Titre affiché en page d'accueil et dans la liste des actualités
+
+      - label: Date
+        name: date
+        widget: datetime
+        format: "YYYY-MM-DD"
+        date_format: "DD/MM/YYYY"
+        time_format: false
+        default: "{{now}}"
+
+      - label: Catégorie
+        name: category
+        widget: select
+        options:
+          - Vie municipale
+          - Travaux
+          - Environnement
+          - Culture
+          - Social
+          - Autres
+
+      - label: Résumé
+        name: excerpt
+        widget: text
+        hint: Court résumé affiché dans les cartes et les listes (150 caractères max)
+
+      - label: Image principale
+        name: image
+        widget: image
+        required: false
+        hint: Image illustrant l'actualité (format paysage recommandé, 1200×630 px)
+        media_folder: /public/images/uploads/actualites
+        public_folder: /images/uploads/actualites
+
+      - label: Contenu
+        name: body
+        widget: markdown
+        hint: Contenu complet de l'actualité (Markdown)
+
+  # ── Démarches administratives ───────────────────────────────────────────────
+  - name: demarches
+    label: Démarches
+    label_singular: Démarche
+    folder: content/demarches
+    create: true
+    delete: true
+    slug: "{{fields.id}}"
+    summary: "{{title}} ({{category}})"
+    sortable_fields: [title, category]
+    fields:
+      - label: Identifiant (slug)
+        name: id
+        widget: string
+        hint: Identifiant unique sans espace ni accent (ex. acte-naissance)
+        pattern: ["^[a-z0-9-]+$", "Minuscules, chiffres et tirets uniquement"]
+
+      - label: Titre
+        name: title
+        widget: string
+
+      - label: Description
+        name: description
+        widget: text
+        hint: Description courte affichée dans la liste des démarches
+
+      - label: Catégorie
+        name: category
+        widget: select
+        options:
+          - État civil
+          - Urbanisme
+          - Élections
+          - Social
+          - Autres
+
+      - label: Délai de traitement
+        name: delai
+        widget: string
+        required: false
+        hint: Exemple : "5 à 10 jours ouvrés"
+
+      - label: Documents requis
+        name: documents
+        widget: list
+        required: false
+        hint: Liste des pièces justificatives à fournir
+        field:
+          label: Document
+          name: item
+          widget: string
+
+      - label: Lien externe
+        name: lienExterne
+        widget: string
+        required: false
+        hint: URL service-public.fr ou autre référence externe
+
+      - label: Contenu détaillé
+        name: body
+        widget: markdown
+        required: false
+        hint: Informations complémentaires (procédure détaillée, formulaires, etc.)
+
+  # ── Pages éditoriales ───────────────────────────────────────────────────────
+  - name: pages
+    label: Pages
+    label_singular: Page
+    folder: content/pages
+    create: true
+    delete: false
+    slug: "{{slug}}"
+    preview_path: "/{{slug}}"
+    fields:
+      - label: Titre
+        name: title
+        widget: string
+
+      - label: Description (SEO)
+        name: description
+        widget: text
+        required: false
+        hint: Description pour les moteurs de recherche (150 caractères max)
+
+      - label: Contenu
+        name: body
+        widget: markdown
