@@ -3,6 +3,8 @@ import path from "path";
 
 import matter from "gray-matter";
 
+import { toIsoDate } from "./dates";
+
 // ─── Types ───────────────────────────────────────────────────────────────────
 
 export interface Actualite {
@@ -37,7 +39,7 @@ function parseActualiteFile(filePath: string): Actualite {
     slug,
     title: data.title ?? "",
     excerpt: data.excerpt ?? "",
-    date: data.date ? String(data.date).slice(0, 10) : "",
+    date: toIsoDate(data.date),
     category: data.category ?? "",
     image: data.image,
     content: content.trim(),
