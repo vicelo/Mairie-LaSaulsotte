@@ -3,7 +3,7 @@ import { PageLayout } from "@/components/layout/PageLayout";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 
 export const metadata: Metadata = {
-  title: "Politique de confidentialité — Mairie de La Saulsotte",
+  title: "Politique de confidentialité",
   description:
     "Politique de confidentialité et traitement des données personnelles du site de la Mairie de La Saulsotte.",
   robots: { index: false },
@@ -40,8 +40,11 @@ export default function ConfidentialitePage() {
             <div>
               <dt className="font-medium text-gray-700">Contact</dt>
               <dd className="text-gray-900">
-                <a href="mailto:sg.mairie@lasaulsotte.fr" className="text-primary hover:underline">
-                  sg.mairie@lasaulsotte.fr
+                <a
+                  href="mailto:contact.mairie@lasaulsotte.fr"
+                  className="text-primary hover:underline"
+                >
+                  contact.mairie@lasaulsotte.fr
                 </a>
               </dd>
             </div>
@@ -109,8 +112,8 @@ export default function ConfidentialitePage() {
           </ul>
           <p className="mt-3 text-sm text-gray-700">
             Pour exercer ces droits, contactez-nous par courriel à{" "}
-            <a href="mailto:sg.mairie@lasaulsotte.fr" className="text-primary hover:underline">
-              sg.mairie@lasaulsotte.fr
+            <a href="mailto:contact.mairie@lasaulsotte.fr" className="text-primary hover:underline">
+              contact.mairie@lasaulsotte.fr
             </a>{" "}
             en joignant une copie de votre pièce d&apos;identité. Vous pouvez également adresser une
             réclamation à la{" "}
@@ -135,7 +138,7 @@ export default function ConfidentialitePage() {
           </p>
         </section>
 
-        <p className="text-xs text-gray-400">Dernière mise à jour : 12 avril 2026.</p>
+        <p className="text-xs text-gray-600">Dernière mise à jour : 7 août 2026.</p>
       </div>
     </PageLayout>
   );

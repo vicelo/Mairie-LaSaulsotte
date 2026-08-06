@@ -4,7 +4,7 @@ import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Services — Mairie de La Saulsotte",
+  title: "Services",
   description: "Découvrez les services proposés par la mairie de La Saulsotte aux habitants.",
 };
 
