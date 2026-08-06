@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { PageLayout } from "@/components/layout/PageLayout";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { getAllDemarches } from "@/lib/demarches";
+import { HORAIRES_RESUME, MAIRIE } from "@/lib/commune";
 import DemarchesClient from "./DemarchesClient";
 
 export const metadata: Metadata = {
@@ -33,13 +34,12 @@ export default function DemarchesPage() {
 
       {/* Encart info pratique */}
       <div className="mb-8 rounded-xl border border-primary-100 bg-primary-100 p-4 text-sm text-primary">
-        <strong>Accueil en mairie :</strong> lundi et mercredi de 16h à 19h30, vendredi de 16h à
-        18h30, samedi de 9h30 à 11h30. Tél.{" "}
+        <strong>Accueil en mairie :</strong> {HORAIRES_RESUME}. Tél.{" "}
         <a
-          href="tel:+33325398228"
+          href={`tel:${MAIRIE.telephoneLien}`}
           className="rounded underline hover:text-primary/80 focus:outline-none focus:ring-2 focus:ring-primary"
         >
-          03 25 39 82 28
+          {MAIRIE.telephone}
         </a>
       </div>
 

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { LogoMairie } from "../ui/LogoMairie";
+import { COMMUNE, HORAIRES, MAIRIE } from "@/lib/commune";
 
 const PLAN_DU_SITE = [
   { label: "Accueil", href: "/" },
@@ -31,25 +32,25 @@ export function Footer() {
           <div className="flex flex-col gap-3">
             <div className="flex items-center gap-2">
               <LogoMairie className="h-10 w-10 text-gray-500" monochrome />
-              <span className="text-sm font-semibold text-gray-700">Mairie de La Saulsotte</span>
+              <span className="text-sm font-semibold text-gray-700">Mairie de {COMMUNE.nom}</span>
             </div>
             <address className="text-sm not-italic leading-relaxed text-gray-500">
-              10 Rue Pavée
+              {MAIRIE.adresse}
               <br />
-              10400 La Saulsotte
+              {MAIRIE.codePostal} {MAIRIE.ville}
               <br />
               <a
-                href="tel:+33325398228"
+                href={`tel:${MAIRIE.telephoneLien}`}
                 className="rounded hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary"
               >
-                03 25 39 82 28
+                {MAIRIE.telephone}
               </a>
               <br />
               <a
-                href="mailto:sg.mairie@lasaulsotte.fr"
-                className="rounded hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary"
+                href={`mailto:${MAIRIE.email}`}
+                className="break-all rounded hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary"
               >
-                sg.mairie@lasaulsotte.fr
+                {MAIRIE.email}
               </a>
             </address>
           </div>
@@ -98,24 +99,18 @@ export function Footer() {
               Horaires d&apos;ouverture
             </h2>
             <dl className="space-y-1 text-sm text-gray-600">
-              <div className="flex justify-between gap-4">
-                <dt>Lun &amp; Mer</dt>
-                <dd>16h00 – 19h30</dd>
-              </div>
-              <div className="flex justify-between gap-4">
-                <dt>Ven</dt>
-                <dd>16h00 – 18h30</dd>
-              </div>
-              <div className="flex justify-between gap-4">
-                <dt>Sam</dt>
-                <dd>9h30 – 11h30</dd>
-              </div>
+              {HORAIRES.map((creneau) => (
+                <div key={creneau.jours} className="flex justify-between gap-4">
+                  <dt>{creneau.jours}</dt>
+                  <dd>{creneau.horaire}</dd>
+                </div>
+              ))}
             </dl>
           </div>
         </div>
 
         {/* Barre de bas de page */}
-        <div className="mt-8 border-t border-gray-200 pt-6 text-center text-xs text-gray-400">
+        <div className="mt-8 border-t border-gray-200 pt-6 text-center text-xs text-gray-600">
           © {annee} Mairie de La Saulsotte — Tous droits réservés.{" "}
           <span className="inline-block">Accessibilité : partiellement conforme RGAA 4.1</span>
         </div>
