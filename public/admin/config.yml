@@ -35,6 +35,53 @@ display_url: https://lasaulsotte.fr
 
 collections:
 
+  # ── Annonces (bandeau défilant en page d'accueil) ──────────────────────────
+  - name: annonces
+    label: Annonces (bandeau accueil)
+    label_singular: Annonce
+    folder: content/annonces
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    summary: "{{texte}}"
+    sortable_fields: [ordre]
+    fields:
+      - label: Texte de l'annonce
+        name: texte
+        widget: string
+        hint: Message court affiché dans le bandeau défilant (150 caractères max)
+
+      - label: Lien
+        name: lien
+        widget: string
+        required: false
+        hint: "Page vers laquelle pointe l'annonce, ex. /actualites/mon-article. Laisser vide si aucun."
+
+      - label: Date de début d'affichage
+        name: dateDebut
+        widget: datetime
+        format: "YYYY-MM-DD"
+        date_format: "DD/MM/YYYY"
+        time_format: false
+        required: false
+        hint: L'annonce n'apparaîtra qu'à partir de cette date. Vide = tout de suite.
+
+      - label: Date de fin d'affichage
+        name: dateFin
+        widget: datetime
+        format: "YYYY-MM-DD"
+        date_format: "DD/MM/YYYY"
+        time_format: false
+        required: false
+        hint: Dernier jour d'affichage. L'annonce disparaît ensuite toute seule. Vide = pas d'expiration.
+
+      - label: Ordre d'affichage
+        name: ordre
+        widget: number
+        value_type: int
+        default: 1
+        hint: Les plus petits nombres passent en premier dans le bandeau.
+
   # ── Actualités ─────────────────────────────────────────────────────────────
   - name: actualites
     label: Actualités

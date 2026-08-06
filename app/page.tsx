@@ -4,6 +4,17 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { BannerAnnonce } from "@/components/ui/BannerAnnonce";
 import { Card } from "@/components/ui/Card";
+import { getAnnoncesActives } from "@/lib/annonces";
+import { getAllActualites } from "@/lib/actualites";
+
+/** Nombre d'actualités mises en avant en page d'accueil. */
+const NB_ACTUALITES_HOME = 3;
+
+/**
+ * Revalidation horaire : une annonce dont la `dateFin` est dépassée disparaît
+ * du bandeau même si aucune publication n'a eu lieu entre-temps.
+ */
+export const revalidate = 3600;
 
 // ─── SEO ────────────────────────────────────────────────────────────────────
 
@@ -21,54 +32,9 @@ export const metadata: Metadata = {
 };
 
 // ─── Données réelles ─────────────────────────────────────────────────────────
-
-const ANNONCES = [
-  {
-    id: "conseil-municipal-avril-2026",
-    texte:
-      "Conseil municipal du 8 avril 2026 — Budget primitif 2026 adopté à l'unanimité. Travaux de voirie programmés en mai.",
-    href: "/actualites/conseil-municipal-avril-2026",
-  },
-  {
-    id: "fete-village-2026",
-    texte:
-      "Fête du village — 28 juin 2026. Concours de boules, repas champêtre et bal populaire. Inscriptions en mairie.",
-    href: "/actualites/fete-village-2026",
-  },
-  {
-    id: "travaux-voirie-mai-2026",
-    texte:
-      "Travaux — Chemin des Charmes (4–22 mai 2026). Circulation déviée pendant la durée du chantier.",
-    href: "/actualites/travaux-voirie-mai-2026",
-  },
-];
-
-const ACTUALITES = [
-  {
-    slug: "conseil-municipal-avril-2026",
-    title: "Conseil municipal du 8 avril 2026 — Compte rendu",
-    excerpt:
-      "Budget 2026 adopté à l'unanimité, travaux de voirie programmés en mai, convention avec l'association sportive. Retrouvez le compte rendu complet.",
-    date: "2026-04-10",
-    category: "Informations municipales",
-  },
-  {
-    slug: "fete-village-2026",
-    title: "Fête du village — Inscriptions ouvertes",
-    excerpt:
-      "La fête annuelle du village est de retour le 28 juin 2026. Concours de boules, repas champêtre, bal populaire — toute la commune est invitée !",
-    date: "2026-04-05",
-    category: "Événements locaux",
-  },
-  {
-    slug: "travaux-voirie-mai-2026",
-    title: "Travaux de voirie — Chemin des Charmes",
-    excerpt:
-      "Des travaux de réfection débutent en mai 2026 sur le chemin des Charmes. Déviations en place pendant trois semaines.",
-    date: "2026-04-08",
-    category: "Travaux & urbanisme",
-  },
-];
+//
+// Les annonces et les actualités proviennent du CMS (content/annonces,
+// content/actualites) — voir getAnnoncesActives() et getAllActualites().
 
 const ACCES_RAPIDES = [
   {
@@ -196,12 +162,15 @@ const ACCES_RAPIDES = [
 // ─── Page ────────────────────────────────────────────────────────────────────
 
 export default function HomePage() {
+  const annonces = getAnnoncesActives();
+  const actualites = getAllActualites().slice(0, NB_ACTUALITES_HOME);
+
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
 
       {/* Bandeau annonces — pleine largeur */}
-      <BannerAnnonce annonces={ANNONCES} />
+      <BannerAnnonce annonces={annonces} />
 
       <main id="contenu-principal" tabIndex={-1} className="flex-1">
         {/* ── Hero ──────────────────────────────────────────────────────── */}
@@ -331,7 +300,7 @@ export default function HomePage() {
             </div>
 
             <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {ACTUALITES.map((actu) => (
+              {actualites.map((actu) => (
                 <Card
                   key={actu.slug}
                   title={actu.title}
@@ -339,6 +308,8 @@ export default function HomePage() {
                   date={actu.date}
                   category={actu.category}
                   href={`/actualites/${actu.slug}`}
+                  imageSrc={actu.image}
+                  imageAlt=""
                 />
               ))}
             </div>
