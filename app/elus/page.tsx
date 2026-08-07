@@ -3,6 +3,7 @@ import Link from "next/link";
 import { PageLayout } from "@/components/layout/PageLayout";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { HORAIRES_RESUME, MAIRIE } from "@/lib/commune";
+import { getAllElus } from "@/lib/elus";
 
 export const metadata: Metadata = {
   title: "Vos Élus",
@@ -14,20 +15,6 @@ export const metadata: Metadata = {
   },
 };
 
-/**
- * Composition du conseil municipal.
- *
- * Seul le nom du maire est publié tant que la mairie n'a pas transmis la
- * liste nominative issue du renouvellement de mars 2026 : mieux vaut une
- * information partielle qu'une liste périmée présentée comme actuelle.
- * Sources concordantes pour le maire : annuaire des mairies, Wikipédia.
- */
-const MAIRE = {
-  nom: "Michelle Monos",
-  fonction: "Maire",
-  depuis: "15 mars 2026",
-};
-
 const CONSEIL = {
   effectif: 15,
   femmes: 8,
@@ -36,6 +23,12 @@ const CONSEIL = {
 };
 
 export default function ElusPage() {
+  const elus = getAllElus();
+  // La composition n'est complète que lorsque tous les sièges sont saisis
+  // dans le CMS ; en deçà, on l'annonce plutôt que de laisser croire à un
+  // conseil de trois membres.
+  const compositionComplete = elus.length >= CONSEIL.effectif;
+
   return (
     <PageLayout>
       <Breadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Vos Élus" }]} />
@@ -46,25 +39,56 @@ export default function ElusPage() {
         mars 2026. Il se réunit régulièrement en séance publique.
       </p>
 
-      {/* ── Le maire ──────────────────────────────────────────────────── */}
-      <section aria-labelledby="maire-titre" className="mb-10">
-        <h2 id="maire-titre" className="mb-6 text-2xl font-bold text-gray-800">
-          Le maire
+      {/* ── Composition ───────────────────────────────────────────────── */}
+      <section aria-labelledby="composition-titre" className="mb-10">
+        <h2 id="composition-titre" className="mb-6 text-2xl font-bold text-gray-800">
+          {compositionComplete ? "Le conseil municipal" : "Le maire"}
         </h2>
-        <div className="max-w-md rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
-          <p className="text-lg font-semibold text-gray-900">{MAIRE.nom}</p>
-          <p className="text-sm font-medium text-primary">{MAIRE.fonction}</p>
-          <p className="mt-2 text-sm text-gray-500">En fonction depuis le {MAIRE.depuis}</p>
-        </div>
+
+        {elus.length > 0 ? (
+          <ul role="list" className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {elus.map((elu) => (
+              <li
+                key={elu.slug}
+                className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm"
+              >
+                <p className="font-semibold text-gray-900">{elu.nom}</p>
+                <p className="text-sm font-medium text-primary">{elu.fonction}</p>
+                {elu.delegation && <p className="mt-1 text-sm text-gray-600">{elu.delegation}</p>}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-gray-700">
+            La composition du conseil municipal est consultable en mairie.
+          </p>
+        )}
+
+        {!compositionComplete && (
+          <div className="mt-6 max-w-2xl rounded-xl border border-accent/30 bg-accent/10 p-4 text-sm text-gray-800">
+            <p className="font-semibold">Liste nominative en cours d&apos;actualisation</p>
+            <p className="mt-1">
+              La composition détaillée du conseil municipal (adjoints et conseillers) est en cours
+              de mise à jour à la suite du renouvellement de mars 2026. Elle est consultable en
+              mairie, ou par téléphone au{" "}
+              <a
+                href={`tel:${MAIRIE.telephoneLien}`}
+                className="rounded underline hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary"
+              >
+                {MAIRIE.telephone}
+              </a>
+              .
+            </p>
+          </div>
+        )}
       </section>
 
-      {/* ── Le conseil municipal ──────────────────────────────────────── */}
-      <section aria-labelledby="conseil-titre" className="mb-10">
-        <h2 id="conseil-titre" className="mb-6 text-2xl font-bold text-gray-800">
-          Le conseil municipal
+      {/* ── Chiffres du conseil ───────────────────────────────────────── */}
+      <section aria-labelledby="chiffres-titre" className="mb-10">
+        <h2 id="chiffres-titre" className="mb-6 text-2xl font-bold text-gray-800">
+          Le conseil en chiffres
         </h2>
-
-        <dl className="mb-6 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-3 rounded-xl border border-gray-200 bg-white p-6 sm:grid-cols-2">
+        <dl className="grid max-w-2xl grid-cols-1 gap-x-8 gap-y-3 rounded-xl border border-gray-200 bg-white p-6 sm:grid-cols-2">
           <div className="flex justify-between gap-4 border-b border-gray-100 pb-2">
             <dt className="text-sm font-medium text-gray-700">Nombre d&apos;élus</dt>
             <dd className="text-sm text-gray-900">{CONSEIL.effectif}</dd>
@@ -80,22 +104,6 @@ export default function ElusPage() {
             <dd className="text-right text-sm text-gray-900">{CONSEIL.scrutin}</dd>
           </div>
         </dl>
-
-        <div className="max-w-2xl rounded-xl border border-accent/30 bg-accent/10 p-4 text-sm text-gray-800">
-          <p className="font-semibold">Liste nominative en cours d&apos;actualisation</p>
-          <p className="mt-1">
-            La composition détaillée du conseil municipal (adjoints et conseillers) est en cours de
-            mise à jour à la suite du renouvellement de mars 2026. Elle est consultable en mairie,
-            ou par téléphone au{" "}
-            <a
-              href={`tel:${MAIRIE.telephoneLien}`}
-              className="rounded underline hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary"
-            >
-              {MAIRIE.telephone}
-            </a>
-            .
-          </p>
-        </div>
       </section>
 
       {/* ── Permanences ───────────────────────────────────────────────── */}

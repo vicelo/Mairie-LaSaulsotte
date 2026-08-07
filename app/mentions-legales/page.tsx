@@ -3,6 +3,7 @@ import Link from "next/link";
 import { PageLayout } from "@/components/layout/PageLayout";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { ADRESSE_COMPLETE, COMMUNE, MAIRIE } from "@/lib/commune";
+import { getMaire } from "@/lib/elus";
 import { TOUTES_LES_PHOTOS } from "@/lib/images";
 
 export const metadata: Metadata = {
@@ -12,6 +13,8 @@ export const metadata: Metadata = {
 };
 
 export default function MentionsLegalesPage() {
+  const maire = getMaire();
+
   return (
     <PageLayout>
       <Breadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Mentions légales" }]} />
@@ -57,8 +60,11 @@ export default function MentionsLegalesPage() {
               </dd>
             </div>
             <div>
-              <dt className="font-medium text-gray-700">Directrice de la publication</dt>
-              <dd className="text-gray-900">Michelle Monos, Maire de {COMMUNE.nom}</dd>
+              <dt className="font-medium text-gray-700">Direction de la publication</dt>
+              <dd className="text-gray-900">
+                {maire ? `${maire.nom}, ${maire.fonction.toLowerCase()}` : "Le maire"} de{" "}
+                {COMMUNE.nom}
+              </dd>
             </div>
           </dl>
         </section>
