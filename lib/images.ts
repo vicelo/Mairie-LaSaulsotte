@@ -7,8 +7,21 @@
  * image d'ici sans que son entrée figure dans ce catalogue.
  */
 
+/**
+ * Préfixe le chemin d'un fichier de `public/` par le basePath du site.
+ *
+ * En `images.unoptimized`, next/image sert le `src` tel quel sans y appliquer
+ * le basePath. Sur un déploiement en sous-répertoire — la pré-production
+ * GitHub Pages, servie depuis /Mairie-LaSaulsotte — toutes les images
+ * renvoient alors 404. Le préfixe est résolu à la compilation, ce module
+ * n'étant importé que par des composants serveur.
+ */
+function cheminAsset(chemin: string): string {
+  return `${process.env.BASE_PATH ?? ""}${chemin}`;
+}
+
 export interface Photo {
-  /** Chemin public de l'image. */
+  /** Chemin public de l'image, basePath compris. */
   src: string;
   /** Texte alternatif — décrit l'image, ne commence pas par « Photo de ». */
   alt: string;
@@ -23,7 +36,7 @@ export interface Photo {
 
 export const PHOTOS = {
   villagePanorama: {
-    src: "/images/commune/village-panorama.jpg",
+    src: cheminAsset("/images/commune/village-panorama.jpg"),
     alt: "Vue générale du village de La Saulsotte entouré de champs",
     legende: "Le village de La Saulsotte",
     auteur: "Thor19",
@@ -32,7 +45,7 @@ export const PHOTOS = {
     source: "https://commons.wikimedia.org/wiki/File:La_Saulsotte_village.jpg",
   },
   village01: {
-    src: "/images/commune/village-01.jpg",
+    src: cheminAsset("/images/commune/village-01.jpg"),
     alt: "Rue et habitations du bourg de La Saulsotte",
     legende: "Le bourg de La Saulsotte",
     auteur: "François GOGLINS",
@@ -41,7 +54,7 @@ export const PHOTOS = {
     source: "https://commons.wikimedia.org/wiki/File:La_Saulsotte-FR-10-village-01.JPG",
   },
   village02: {
-    src: "/images/commune/village-02.jpg",
+    src: cheminAsset("/images/commune/village-02.jpg"),
     alt: "Vue panoramique du village de La Saulsotte",
     legende: "Panorama sur La Saulsotte",
     auteur: "François GOGLINS",
@@ -50,7 +63,7 @@ export const PHOTOS = {
     source: "https://commons.wikimedia.org/wiki/File:La_Saulsotte-FR-10-village-02.JPG",
   },
   courtioux01: {
-    src: "/images/commune/courtioux-01.jpg",
+    src: cheminAsset("/images/commune/courtioux-01.jpg"),
     alt: "Maisons du hameau de Courtioux",
     legende: "Le hameau de Courtioux",
     auteur: "Pline",
@@ -59,7 +72,7 @@ export const PHOTOS = {
     source: "https://commons.wikimedia.org/wiki/File:Courtioux_DSC_0011.JPG",
   },
   courtioux02: {
-    src: "/images/commune/courtioux-02.jpg",
+    src: cheminAsset("/images/commune/courtioux-02.jpg"),
     alt: "Vue du hameau de Courtioux et de ses environs",
     legende: "Courtioux, l'un des hameaux de la commune",
     auteur: "Pline",
@@ -68,7 +81,7 @@ export const PHOTOS = {
     source: "https://commons.wikimedia.org/wiki/File:Courtioux_DSC_0014.JPG",
   },
   aireDeJeux: {
-    src: "/images/commune/aire-de-jeux.jpg",
+    src: cheminAsset("/images/commune/aire-de-jeux.jpg"),
     alt: "Aire de jeux communale de La Saulsotte",
     legende: "L'aire de jeux communale",
     auteur: "François GOGLINS",
@@ -77,7 +90,7 @@ export const PHOTOS = {
     source: "https://commons.wikimedia.org/wiki/File:La_Saulsotte-FR-10-aire_de_jeux-a1.jpg",
   },
   amphoreResson: {
-    src: "/images/commune/amphore-resson.jpg",
+    src: cheminAsset("/images/commune/amphore-resson.jpg"),
     alt: "Amphore gallo-romaine du IIe siècle découverte à Resson",
     legende: "Amphore du IIe siècle découverte à Resson, musée d'Épernay",
     auteur: "G. Garitan",
@@ -87,7 +100,7 @@ export const PHOTOS = {
       "https://commons.wikimedia.org/wiki/File:Amphore_locale_IIe_s_la_saulsotte_resson_1007779.jpg",
   },
   paruresCardium: {
-    src: "/images/commune/parures-cardium.jpg",
+    src: cheminAsset("/images/commune/parures-cardium.jpg"),
     alt: "Parures néolithiques en coquilles de cardium trouvées à La Saulsotte",
     legende: "Parures néolithiques en coquilles de cardium découvertes sur la commune",
     auteur: "G. Garitan",
