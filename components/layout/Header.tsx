@@ -21,11 +21,23 @@ const NAV_ITEMS = [
  * - Focus piégé dans le menu mobile quand ouvert
  * - Skip link vers le contenu principal
  */
+/**
+ * Retire le slash final d'un chemin, hors racine.
+ *
+ * Le site est configuré en `trailingSlash: true` : l'URL servie est
+ * `/actualites/` alors que les liens de navigation pointent vers
+ * `/actualites`. Sans normalisation, la comparaison échoue et aucun lien
+ * n'est jamais marqué comme page courante.
+ */
+function normaliserChemin(chemin: string): string {
+  return chemin.length > 1 ? chemin.replace(/\/+$/, "") : chemin;
+}
+
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
   const hamburgerRef = useRef<HTMLButtonElement>(null);
-  const pathname = usePathname();
+  const pathname = normaliserChemin(usePathname() ?? "/");
 
   // Ferme le menu sur Escape
   useEffect(() => {
@@ -85,7 +97,7 @@ export function Header() {
           {/* Navigation desktop */}
           <ul className="hidden items-center gap-1 md:flex" role="list">
             {NAV_ITEMS.map((item) => {
-              const isCurrent = pathname === item.href;
+              const isCurrent = pathname === normaliserChemin(item.href);
               return (
                 <li key={item.href}>
                   <Link
@@ -157,7 +169,7 @@ export function Header() {
         >
           <ul className="flex flex-col px-4 pb-4 pt-2" role="list">
             {NAV_ITEMS.map((item) => {
-              const isCurrent = pathname === item.href;
+              const isCurrent = pathname === normaliserChemin(item.href);
               return (
                 <li key={item.href}>
                   <Link

@@ -1,8 +1,21 @@
+import { readdirSync } from "node:fs";
+import { join } from "node:path";
+
 import { test, expect } from "@playwright/test";
 
 /**
  * Tests E2E — Section Actualités (liste + articles)
  */
+
+/**
+ * Slugs lus dans content/actualites plutôt que recopiés ici.
+ *
+ * Une liste figée casse la CI dès qu'une actualité est dépubliée — ce qui
+ * est le travail quotidien de la mairie, pas une régression.
+ */
+const slugsActualites = readdirSync(join(process.cwd(), "content", "actualites"))
+  .filter((fichier) => fichier.endsWith(".md"))
+  .map((fichier) => fichier.replace(/\.md$/, ""));
 
 test.describe("Actualités — Liste", () => {
   test("Page liste accessible et titre correct", async ({ page }) => {
@@ -32,13 +45,11 @@ test.describe("Actualités — Liste", () => {
 });
 
 test.describe("Actualités — Articles individuels", () => {
-  const knownSlugs = [
-    "conseil-municipal-avril-2026",
-    "travaux-rue-de-la-paix",
-    "collecte-dechets-verts-printemps",
-  ];
+  test("Au moins une actualité est publiée", () => {
+    expect(slugsActualites.length).toBeGreaterThan(0);
+  });
 
-  for (const slug of knownSlugs) {
+  for (const slug of slugsActualites) {
     test(`Article ${slug} — accessible`, async ({ page }) => {
       const response = await page.goto(`/actualites/${slug}`);
       expect(response?.status()).toBeLessThan(400);
