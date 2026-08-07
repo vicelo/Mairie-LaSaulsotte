@@ -33,7 +33,10 @@ export default defineConfig({
   webServer: process.env.BASE_URL
     ? undefined
     : {
-        command: "npm run start",
+        // `next start` refuse de démarrer sur un projet en `output: "export"` :
+        // les tests s'exécutent donc contre le dossier `out/` réellement
+        // déployé, servi en statique.
+        command: "npm run serve:static",
         url: "http://localhost:3000",
         reuseExistingServer: !process.env.CI,
         timeout: 120_000,
