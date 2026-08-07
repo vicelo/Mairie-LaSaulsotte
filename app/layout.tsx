@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+/**
+ * Pré-production (déploiement en sous-répertoire) : le robots.txt seul ne
+ * suffit pas à écarter une page déjà connue des moteurs, d'où la directive
+ * noindex portée par chaque page. Voir aussi app/robots.ts.
+ */
+const estPreproduction = Boolean(process.env.BASE_PATH);
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://lasaulsotte.fr"),
   title: {
@@ -11,7 +18,7 @@ export const metadata: Metadata = {
     "Site officiel de la mairie de La Saulsotte — informations municipales, démarches administratives et actualités du village.",
   keywords: ["La Saulsotte", "mairie", "commune", "Aube", "10", "village"],
   authors: [{ name: "Mairie de La Saulsotte" }],
-  robots: { index: true, follow: true },
+  robots: estPreproduction ? { index: false, follow: false } : { index: true, follow: true },
   icons: {
     icon: [
       { url: "/favicon.svg", type: "image/svg+xml" },
