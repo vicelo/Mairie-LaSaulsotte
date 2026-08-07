@@ -7,6 +7,17 @@
     <title>Administration — Mairie de La Saulsotte</title>
   </head>
   <body>
-    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <!--
+      Sveltia CMS — interface d'administration du contenu.
+
+      Remplace Decap CMS, dont le backend GitHub n'acceptait pas
+      l'authentification configurée ici : la connexion ne pouvait pas
+      aboutir. Sveltia lit le même config.yml et se connecte à GitHub sans
+      serveur d'authentification à héberger.
+
+      Version épinglée : une balise ouverte (^0.x) exposerait
+      l'administration du site à une régression publiée en amont.
+    -->
+    <script src="https://unpkg.com/@sveltia/cms@0.181.0/dist/sveltia-cms.js"></script>
   </body>
 </html>

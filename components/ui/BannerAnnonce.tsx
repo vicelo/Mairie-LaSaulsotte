@@ -6,12 +6,30 @@ interface Annonce {
   id: string;
   texte: string;
   href?: string;
+  /** Premier jour d'affichage (YYYY-MM-DD). Vide = tout de suite. */
+  dateDebut?: string;
+  /** Dernier jour d'affichage (YYYY-MM-DD). Vide = pas d'expiration. */
+  dateFin?: string;
 }
 
 interface BannerAnnonceProps {
   annonces: Annonce[];
   /** Vitesse de défilement en pixels par seconde (défaut: 60) */
   speed?: number;
+}
+
+/** Date du jour au format YYYY-MM-DD, en heure locale. */
+function aujourdhui(): string {
+  const d = new Date();
+  const mois = String(d.getMonth() + 1).padStart(2, "0");
+  const jour = String(d.getDate()).padStart(2, "0");
+  return `${d.getFullYear()}-${mois}-${jour}`;
+}
+
+function estActive(a: Annonce, jour: string): boolean {
+  if (a.dateDebut && a.dateDebut > jour) return false;
+  if (a.dateFin && a.dateFin < jour) return false;
+  return true;
 }
 
 /**
@@ -24,10 +42,19 @@ interface BannerAnnonceProps {
  *   liste statique sr-only pour AT)
  * - Pas de pièges au clavier
  */
-export function BannerAnnonce({ annonces, speed = 60 }: BannerAnnonceProps) {
+export function BannerAnnonce({ annonces: annoncesRecues, speed = 60 }: BannerAnnonceProps) {
   const trackRef = useRef<HTMLUListElement>(null);
   const [paused, setPaused] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
+  const [annonces, setAnnonces] = useState(annoncesRecues);
+
+  // Le site est exporté en statique : sans nouveau build, une annonce expirée
+  // resterait affichée. On refiltre donc à l'affichage, une fois monté — après
+  // l'hydratation, pour ne pas diverger du HTML rendu au build.
+  useEffect(() => {
+    const jour = aujourdhui();
+    setAnnonces(annoncesRecues.filter((a) => estActive(a, jour)));
+  }, [annoncesRecues]);
 
   // Détecte prefers-reduced-motion
   useEffect(() => {

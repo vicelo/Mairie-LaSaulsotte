@@ -1,9 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { BannerAnnonce } from "@/components/ui/BannerAnnonce";
 import { Card } from "@/components/ui/Card";
+import { HorairesMairie } from "@/components/ui/HorairesMairie";
+import { getAnnoncesActives } from "@/lib/annonces";
+import { getAllActualites } from "@/lib/actualites";
+import { COMMUNE } from "@/lib/commune";
+import { PHOTOS } from "@/lib/images";
+
+/** Nombre d'actualités mises en avant en page d'accueil. */
+const NB_ACTUALITES_HOME = 3;
 
 // ─── SEO ────────────────────────────────────────────────────────────────────
 
@@ -21,59 +30,14 @@ export const metadata: Metadata = {
 };
 
 // ─── Données réelles ─────────────────────────────────────────────────────────
-
-const ANNONCES = [
-  {
-    id: "conseil-municipal-avril-2026",
-    texte:
-      "Conseil municipal du 8 avril 2026 — Budget primitif 2026 adopté à l'unanimité. Travaux de voirie programmés en mai.",
-    href: "/actualites/conseil-municipal-avril-2026",
-  },
-  {
-    id: "fete-village-2026",
-    texte:
-      "Fête du village — 28 juin 2026. Concours de boules, repas champêtre et bal populaire. Inscriptions en mairie.",
-    href: "/actualites/fete-village-2026",
-  },
-  {
-    id: "travaux-voirie-mai-2026",
-    texte:
-      "Travaux — Chemin des Charmes (4–22 mai 2026). Circulation déviée pendant la durée du chantier.",
-    href: "/actualites/travaux-voirie-mai-2026",
-  },
-];
-
-const ACTUALITES = [
-  {
-    slug: "conseil-municipal-avril-2026",
-    title: "Conseil municipal du 8 avril 2026 — Compte rendu",
-    excerpt:
-      "Budget 2026 adopté à l'unanimité, travaux de voirie programmés en mai, convention avec l'association sportive. Retrouvez le compte rendu complet.",
-    date: "2026-04-10",
-    category: "Informations municipales",
-  },
-  {
-    slug: "fete-village-2026",
-    title: "Fête du village — Inscriptions ouvertes",
-    excerpt:
-      "La fête annuelle du village est de retour le 28 juin 2026. Concours de boules, repas champêtre, bal populaire — toute la commune est invitée !",
-    date: "2026-04-05",
-    category: "Événements locaux",
-  },
-  {
-    slug: "travaux-voirie-mai-2026",
-    title: "Travaux de voirie — Chemin des Charmes",
-    excerpt:
-      "Des travaux de réfection débutent en mai 2026 sur le chemin des Charmes. Déviations en place pendant trois semaines.",
-    date: "2026-04-08",
-    category: "Travaux & urbanisme",
-  },
-];
+//
+// Les annonces et les actualités proviennent du CMS (content/annonces,
+// content/actualites) — voir getAnnoncesActives() et getAllActualites().
 
 const ACCES_RAPIDES = [
   {
     label: "Démarches",
-    href: "/services/demarches",
+    href: "/demarches",
     icon: (
       <svg
         aria-hidden="true"
@@ -93,7 +57,7 @@ const ACCES_RAPIDES = [
   },
   {
     label: "PLU",
-    href: "/services/plu",
+    href: "/urbanisme",
     icon: (
       <svg
         aria-hidden="true"
@@ -113,7 +77,7 @@ const ACCES_RAPIDES = [
   },
   {
     label: "Eau potable",
-    href: "/services/eau-potable",
+    href: "/demarches",
     icon: (
       <svg
         aria-hidden="true"
@@ -133,7 +97,7 @@ const ACCES_RAPIDES = [
   },
   {
     label: "État civil",
-    href: "/services/etat-civil",
+    href: "/demarches",
     icon: (
       <svg
         aria-hidden="true"
@@ -153,7 +117,7 @@ const ACCES_RAPIDES = [
   },
   {
     label: "Permis & urbanisme",
-    href: "/services/urbanisme",
+    href: "/urbanisme",
     icon: (
       <svg
         aria-hidden="true"
@@ -196,12 +160,15 @@ const ACCES_RAPIDES = [
 // ─── Page ────────────────────────────────────────────────────────────────────
 
 export default function HomePage() {
+  const annonces = getAnnoncesActives();
+  const actualites = getAllActualites().slice(0, NB_ACTUALITES_HOME);
+
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
 
       {/* Bandeau annonces — pleine largeur */}
-      <BannerAnnonce annonces={ANNONCES} />
+      <BannerAnnonce annonces={annonces} />
 
       <main id="contenu-principal" tabIndex={-1} className="flex-1">
         {/* ── Hero ──────────────────────────────────────────────────────── */}
@@ -209,25 +176,31 @@ export default function HomePage() {
           aria-labelledby="hero-titre"
           className="relative isolate overflow-hidden bg-primary"
         >
-          {/* Illustration SVG du village */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/village.svg"
+          {/* Photographie du village — décorative, le sens est porté par le titre */}
+          <Image
+            src={PHOTOS.villagePanorama.src}
             alt=""
             aria-hidden="true"
-            className="absolute inset-0 h-full w-full object-cover opacity-30"
-            loading="eager"
+            fill
+            priority
+            sizes="100vw"
+            className="absolute inset-0 object-cover"
           />
 
-          {/* Dégradé bas de hero */}
+          {/* Voile assurant le contraste RGAA du texte sur la photo.
+              Opacité minimale 90 % : mesurée sur le pire cas (ciel clair),
+              elle garantit 5,9:1 pour le texte blanc et 4,7:1 pour le
+              sous-titre — au-dessus du seuil AA de 4,5:1. */}
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-gradient-to-b from-primary/60 via-primary/50 to-primary/80"
+            className="absolute inset-0 bg-gradient-to-b from-primary/90 via-primary/90 to-primary/95"
           />
 
           <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
             <div className="max-w-2xl">
-              <p className="text-sm font-semibold uppercase tracking-widest text-accent">
+              {/* Blanc et non accent : l'orange de la charte ne dépasse pas
+                  2,8:1 sur le voile vert, très en deçà du seuil AA. */}
+              <p className="text-sm font-semibold uppercase tracking-widest text-white">
                 Site officiel
               </p>
               <h1
@@ -236,13 +209,16 @@ export default function HomePage() {
               >
                 Commune de La Saulsotte
               </h1>
-              <p className="mt-3 text-lg text-primary-100/90">Aube (10) — 677 habitants (2023)</p>
+              <p className="mt-3 text-lg text-primary-100">
+                {COMMUNE.departement} ({COMMUNE.departementNumero}) — {COMMUNE.population} habitants
+                ({COMMUNE.populationAnnee})
+              </p>
 
               {/* CTAs rapides */}
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
                   href="/contact#horaires"
-                  className="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-accent px-6 py-3 text-base font-medium text-white transition-colors duration-150 hover:bg-accent-dark focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+                  className="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-accent px-6 py-3 text-base font-semibold text-gray-900 transition-colors duration-150 hover:bg-accent-dark hover:text-white focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
                 >
                   Horaires mairie
                 </Link>
@@ -253,7 +229,7 @@ export default function HomePage() {
                   Contact
                 </Link>
                 <Link
-                  href="/services/urgences"
+                  href="/contact"
                   className="inline-flex items-center justify-center gap-2 rounded-md border border-white bg-white px-6 py-3 text-base font-medium text-primary transition-colors duration-150 hover:bg-primary-100 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                 >
                   Urgences
@@ -266,50 +242,8 @@ export default function HomePage() {
         {/* ── Horaires de la mairie ─────────────────────────────────────── */}
         <section id="horaires" aria-labelledby="horaires-titre" className="bg-white py-12">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="mx-auto max-w-xl rounded-2xl border border-gray-200 bg-gray-50 p-6 shadow-sm sm:p-8">
-              <h2 id="horaires-titre" className="text-xl font-bold text-primary">
-                Horaires de la mairie
-              </h2>
-
-              <dl className="mt-5 space-y-2 text-sm text-gray-700">
-                <div className="flex justify-between gap-4 border-b border-gray-200 pb-2">
-                  <dt className="font-medium">Lundi &amp; Mercredi</dt>
-                  <dd>16h00 – 19h30</dd>
-                </div>
-                <div className="flex justify-between gap-4 border-b border-gray-200 pb-2">
-                  <dt className="font-medium">Vendredi</dt>
-                  <dd>16h00 – 18h30</dd>
-                </div>
-                <div className="flex justify-between gap-4 border-b border-gray-200 pb-2">
-                  <dt className="font-medium">Samedi</dt>
-                  <dd>9h30 – 11h30</dd>
-                </div>
-                <div className="flex justify-between gap-4">
-                  <dt className="font-medium">Mardi &amp; Jeudi &amp; Dimanche</dt>
-                  <dd className="text-gray-500">Fermé</dd>
-                </div>
-              </dl>
-
-              <div className="mt-5 space-y-2 border-t border-gray-200 pt-5 text-sm">
-                <p>
-                  <span className="font-medium text-gray-600">Tél. :</span>{" "}
-                  <a
-                    href="tel:+33325398228"
-                    className="rounded text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary"
-                  >
-                    03 25 39 82 28
-                  </a>
-                </p>
-                <p>
-                  <span className="font-medium text-gray-600">Email :</span>{" "}
-                  <a
-                    href="mailto:sg.mairie@lasaulsotte.fr"
-                    className="rounded text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary"
-                  >
-                    sg.mairie@lasaulsotte.fr
-                  </a>
-                </p>
-              </div>
+            <div className="mx-auto max-w-xl">
+              <HorairesMairie titleId="horaires-titre" />
             </div>
           </div>
         </section>
@@ -331,7 +265,7 @@ export default function HomePage() {
             </div>
 
             <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {ACTUALITES.map((actu) => (
+              {actualites.map((actu) => (
                 <Card
                   key={actu.slug}
                   title={actu.title}
@@ -339,6 +273,8 @@ export default function HomePage() {
                   date={actu.date}
                   category={actu.category}
                   href={`/actualites/${actu.slug}`}
+                  imageSrc={actu.image}
+                  imageAlt=""
                 />
               ))}
             </div>

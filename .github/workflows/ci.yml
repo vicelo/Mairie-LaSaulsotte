@@ -28,6 +28,11 @@ jobs:
       - name: Check Prettier formatting
         run: npm run format:check
 
+      # Une erreur de syntaxe dans config.yml laisse le build passer et ne
+      # casse que l'interface d'administration : à vérifier explicitement.
+      - name: Verify CMS configuration
+        run: npm run verify:cms
+
   build:
     name: Build
     runs-on: ubuntu-latest

@@ -4,6 +4,7 @@ import { useState, FormEvent } from "react";
 import { PageLayout } from "@/components/layout/PageLayout";
 import { Button } from "@/components/ui/Button";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
+import { COMMUNE, HORAIRES, MAIRIE } from "@/lib/commune";
 
 interface FormErrors {
   nom?: string;
@@ -50,7 +51,7 @@ export default function ContactClient() {
     const message = String(data.get("message") ?? "").trim();
     const sujetLabel = sujet || "Demande via site mairie";
     const corps = `Nom : ${nom}\nEmail : ${email}\nSujet : ${sujetLabel}\n\n${message}`;
-    const mailto = `mailto:sg.mairie@lasaulsotte.fr?subject=${encodeURIComponent(sujetLabel)}&body=${encodeURIComponent(corps)}`;
+    const mailto = `mailto:${MAIRIE.email}?subject=${encodeURIComponent(sujetLabel)}&body=${encodeURIComponent(corps)}`;
     window.location.href = mailto;
     setStatus("success");
   }
@@ -187,28 +188,28 @@ export default function ContactClient() {
               Coordonnées
             </h2>
             <address className="space-y-2 text-sm not-italic text-gray-700">
-              <p className="font-medium text-gray-900">Mairie de La Saulsotte</p>
+              <p className="font-medium text-gray-900">Mairie de {COMMUNE.nom}</p>
               <p>
-                10 Rue Pavée
+                {MAIRIE.adresse}
                 <br />
-                10400 La Saulsotte
+                {MAIRIE.codePostal} {MAIRIE.ville}
               </p>
               <p>
                 Tél. :{" "}
                 <a
-                  href="tel:+33325398228"
+                  href={`tel:${MAIRIE.telephoneLien}`}
                   className="rounded text-primary underline hover:text-primary/80 focus:outline-none focus:ring-2 focus:ring-primary"
                 >
-                  03 25 39 82 28
+                  {MAIRIE.telephone}
                 </a>
               </p>
               <p>
-                Email :{" "}
+                Courriel :{" "}
                 <a
-                  href="mailto:sg.mairie@lasaulsotte.fr"
-                  className="rounded text-primary underline hover:text-primary/80 focus:outline-none focus:ring-2 focus:ring-primary"
+                  href={`mailto:${MAIRIE.email}`}
+                  className="break-all rounded text-primary underline hover:text-primary/80 focus:outline-none focus:ring-2 focus:ring-primary"
                 >
-                  sg.mairie@lasaulsotte.fr
+                  {MAIRIE.email}
                 </a>
               </p>
             </address>
@@ -219,24 +220,23 @@ export default function ContactClient() {
             <h2 id="horaires-titre" className="mb-4 text-xl font-semibold text-gray-800">
               Horaires d&apos;ouverture
             </h2>
-            <dl className="space-y-2 text-sm text-gray-700">
-              <div className="flex justify-between gap-4 border-b border-gray-100 pb-2">
-                <dt className="font-medium">Lundi &amp; Mercredi</dt>
-                <dd>16h00 – 19h30</dd>
-              </div>
-              <div className="flex justify-between gap-4 border-b border-gray-100 pb-2">
-                <dt className="font-medium">Vendredi</dt>
-                <dd>16h00 – 18h30</dd>
-              </div>
-              <div className="flex justify-between gap-4 border-b border-gray-100 pb-2">
-                <dt className="font-medium">Samedi</dt>
-                <dd>9h30 – 11h30</dd>
-              </div>
-              <div className="flex justify-between gap-4">
-                <dt className="font-medium">Mardi &amp; Jeudi &amp; Dimanche</dt>
-                <dd className="text-gray-500">Fermé</dd>
-              </div>
+            <dl className="space-y-3 text-sm text-gray-700">
+              {HORAIRES.map((creneau) => (
+                <div
+                  key={creneau.jours}
+                  className="flex flex-wrap justify-between gap-x-4 gap-y-1 border-b border-gray-100 pb-2 last:border-b-0"
+                >
+                  <dt className="font-medium">{creneau.jours}</dt>
+                  <dd className="text-right">
+                    {creneau.horaire}
+                    {creneau.precision && (
+                      <span className="block text-xs text-gray-500">{creneau.precision}</span>
+                    )}
+                  </dd>
+                </div>
+              ))}
             </dl>
+            <p className="mt-3 text-xs text-gray-500">Fermée les mardi, vendredi et dimanche.</p>
           </section>
 
           {/* Plan d'accès */}

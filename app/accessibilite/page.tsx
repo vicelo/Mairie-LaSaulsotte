@@ -3,7 +3,7 @@ import { PageLayout } from "@/components/layout/PageLayout";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 
 export const metadata: Metadata = {
-  title: "Accessibilité — Mairie de La Saulsotte",
+  title: "Accessibilité",
   description:
     "Déclaration d'accessibilité du site officiel de la Mairie de La Saulsotte, conforme au RGAA 4.1.",
 };
@@ -49,18 +49,38 @@ export default function AccessibilitePage() {
           </h2>
           <ul className="list-disc space-y-2 pl-5 text-sm text-gray-700">
             <li>
-              Certains contenu non textuel ne disposent pas encore d&apos;alternative textuelle
-              complète.
+              Les documents mis à disposition en téléchargement (comptes rendus, règlements,
+              formulaires) sont susceptibles de ne pas être entièrement accessibles.
             </li>
             <li>
-              La navigation clavier peut présenter des imperfections sur certaines sections
-              interactives.
+              Les contenus provenant de services tiers intégrés au site ne sont pas maîtrisés par la
+              commune et peuvent présenter des non-conformités.
             </li>
             <li>
-              Des améliorations sont en cours pour renforcer les contrastes de couleur sur les
-              éléments secondaires.
+              Le site n&apos;a pas encore fait l&apos;objet d&apos;un audit complet des 106 critères
+              du RGAA 4.1 par un prestataire spécialisé.
             </li>
           </ul>
+        </section>
+
+        <section className="rounded-xl border border-gray-200 bg-white p-6">
+          <h2 className="mb-4 text-xl font-semibold text-gray-900">
+            Établissement de cette déclaration
+          </h2>
+          <p className="mb-3 text-sm text-gray-700">
+            Cette déclaration a été établie le <strong>7 août 2026</strong>.
+          </p>
+          <p className="mb-3 text-sm text-gray-700">
+            Les vérifications réalisées à cette date ont porté sur : la structure des titres et des
+            en-têtes, les alternatives textuelles des images, les contrastes de couleur du texte
+            (mesurés automatiquement sur l&apos;ensemble des pages), la navigation au clavier, la
+            présence d&apos;un lien d&apos;évitement, la langue de la page, ainsi que le rendu aux
+            largeurs mobile, tablette et bureau.
+          </p>
+          <p className="text-sm text-gray-700">
+            Ces vérifications ne remplacent pas un audit d&apos;accessibilité complet, qui reste à
+            réaliser.
+          </p>
         </section>
 
         <section className="rounded-xl border border-gray-200 bg-white p-6">
@@ -72,8 +92,11 @@ export default function AccessibilitePage() {
           <ul className="space-y-2 text-sm text-gray-700">
             <li>
               Par courriel :{" "}
-              <a href="mailto:sg.mairie@lasaulsotte.fr" className="text-primary hover:underline">
-                sg.mairie@lasaulsotte.fr
+              <a
+                href="mailto:contact.mairie@lasaulsotte.fr"
+                className="text-primary hover:underline"
+              >
+                contact.mairie@lasaulsotte.fr
               </a>
             </li>
             <li>
