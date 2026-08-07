@@ -188,12 +188,14 @@ export default function HomePage() {
           />
 
           {/* Voile assurant le contraste RGAA du texte sur la photo.
-              Opacité minimale 90 % : mesurée sur le pire cas (ciel clair),
-              elle garantit 5,9:1 pour le texte blanc et 4,7:1 pour le
-              sous-titre — au-dessus du seuil AA de 4,5:1. */}
+              85 % est le compromis retenu : mesuré sur le pire cas (le ciel,
+              zone la plus claire du cliché), il garantit 5,2:1 au texte blanc
+              — au-dessus du seuil AA de 4,5:1 — tout en laissant le village
+              transparaître. Au-delà de 90 %, la photo disparaît sous l'aplat
+              et n'apporte plus rien. */}
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-gradient-to-b from-primary/90 via-primary/90 to-primary/95"
+            className="absolute inset-0 bg-gradient-to-b from-primary/85 via-primary/85 to-primary/90"
           />
 
           <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
@@ -209,7 +211,9 @@ export default function HomePage() {
               >
                 Commune de La Saulsotte
               </h1>
-              <p className="mt-3 text-lg text-primary-100">
+              {/* Blanc plutôt que primary-100, qui ne tient que 4,1:1 sur ce
+                  voile — sous le seuil pour ce texte de 18 px non gras. */}
+              <p className="mt-3 text-lg text-white">
                 {COMMUNE.departement} ({COMMUNE.departementNumero}) — {COMMUNE.population} habitants
                 ({COMMUNE.populationAnnee})
               </p>
