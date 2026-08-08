@@ -90,10 +90,17 @@ Utilisation dans les classes Tailwind :
 
 Le pipeline GitHub Actions (`.github/workflows/ci.yml`) exécute à chaque push/PR :
 
-1. **Lint** — ESLint + vérification Prettier
+1. **Lint** — ESLint, Prettier et validation de la configuration du CMS
 2. **TypeScript** — `tsc --noEmit`
 3. **Build** — `next build` (dépend du lint)
-4. **Deploy** — déploiement automatique sur Vercel (uniquement sur `main`, conditionnel à la présence du secret `VERCEL_TOKEN`)
+4. **Tests E2E** — Playwright, exécuté contre le dossier `out/` réellement déployé
+5. **Deploy** — Vercel, sur `main` uniquement et si le secret `VERCEL_TOKEN` est présent
+
+La pré-production est déployée sur **GitHub Pages** par
+`.github/workflows/pages.yml` à chaque push sur `main` :
+<https://vicelo.github.io/Mairie-LaSaulsotte/>. Elle est servie sous un
+sous-répertoire (`BASE_PATH`), ce qui déclenche automatiquement `noindex` et un
+`robots.txt` fermé — le contenu en cours de validation ne doit pas être référencé.
 
 ## Déploiement
 
@@ -118,19 +125,52 @@ Configurer dans **Settings → Secrets and variables → Actions** du dépôt :
    - `CNAME www` → `cname.vercel-dns.com`
 4. Vercel provisionne automatiquement le certificat TLS (Let's Encrypt)
 
-### OAuth App GitHub pour Decap CMS
+## Administration du contenu
 
-L'interface d'administration (`/admin`) utilise Decap CMS avec authentification PKCE directe GitHub — aucun serveur OAuth requis.
+L'interface d'administration utilise **Sveltia CMS**, configurée dans
+`public/admin/config.yml`. Cinq collections sont éditables : annonces, actualités,
+conseil municipal, hébergements et démarches.
 
-Pour activer la connexion :
+### Éditer en local — sans authentification
 
-1. Aller sur **GitHub → Settings → Developer settings → OAuth Apps → New OAuth App**
-2. Renseigner :
-   - **Application name** : `Mairie La Saulsotte CMS`
-   - **Homepage URL** : `https://lasaulsotte.fr`
-   - **Authorization callback URL** : `https://lasaulsotte.fr/admin/`
-3. Copier le **Client ID** généré
-4. Dans `public/admin/config.yml`, décommenter et renseigner `app_id` avec ce Client ID
+Le moyen le plus direct pour un développeur, et le plus sûr pour tester une
+modification de la configuration avant de la publier :
+
+```bash
+npm run dev
+```
+
+Puis ouvrir **http://localhost:3000/admin/index.html** et choisir
+**« Work with Local Repository »** : le CMS demande le dossier du dépôt et écrit
+directement dans les fichiers Markdown du disque. Aucun compte, aucun jeton.
+
+> ⚠️ En développement, l'URL est bien `/admin/index.html`. `/admin/` renvoie 404 :
+> Next ne résout pas les fichiers d'index de `public/`. Sur le site déployé,
+> `/admin/` fonctionne normalement.
+
+> Cette option requiert l'API File System Access : Chrome, Edge ou Opera.
+> Elle n'apparaît pas sous Firefox ni Safari.
+
+### Éditer en ligne — pour la mairie
+
+Sur le site déployé, ouvrir **`/admin/`** et cliquer sur **« Sign In with GitHub »**.
+L'utilisateur doit disposer d'un compte GitHub ajouté en collaborateur du dépôt
+(**Settings → Collaborators**). Chaque publication déclenche un déploiement.
+
+Sveltia s'appuie par défaut sur un service OAuth tiers. Pour s'en affranchir,
+déployer [sveltia-cms-auth](https://github.com/sveltia/sveltia-cms-auth) sur
+Cloudflare Workers (gratuit) et renseigner l'URL obtenue dans `base_url`, déjà
+présente en commentaire dans `config.yml`.
+
+### Vérifier la configuration
+
+```bash
+npm run verify:cms
+```
+
+Une erreur de syntaxe dans `config.yml` ne casse pas le build : le site se déploie
+et seule l'interface `/admin` refuse de démarrer. Cette vérification, exécutée en
+CI, fait échouer la construction au plus tôt.
 
 ## Accessibilité
 
