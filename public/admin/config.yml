@@ -180,6 +180,65 @@ collections:
         required: false
         hint: "Facultatif. Exemple : « Voirie et bâtiments communaux »."
 
+  # ── Hébergements touristiques ──────────────────────────────────────────────
+  - name: hebergements
+    label: Hébergements
+    label_singular: Hébergement
+    folder: content/hebergements
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    summary: "{{nom}} — {{type}}"
+    sortable_fields: [ordre, nom]
+    fields:
+      - label: Nom de l'hébergement
+        name: nom
+        widget: string
+
+      - label: Type
+        name: type
+        widget: select
+        options:
+          - Meublé de tourisme
+          - Chambres d'hôtes
+          - Gîte
+          - Camping
+          - Autre
+
+      - label: Description
+        name: description
+        widget: text
+        hint: Quelques phrases de présentation. Rester factuel et de longueur comparable d'un hébergement à l'autre.
+
+      - label: Adresse
+        name: adresse
+        widget: string
+        required: false
+
+      - label: Capacité (nombre de personnes)
+        name: capacite
+        widget: number
+        value_type: int
+        required: false
+
+      - label: Téléphone
+        name: telephone
+        widget: string
+        required: false
+
+      - label: Lien de réservation ou site
+        name: lien
+        widget: string
+        required: false
+        hint: Adresse complète commençant par https://
+
+      - label: Ordre d'affichage
+        name: ordre
+        widget: number
+        value_type: int
+        default: 10
+        hint: À valeur égale, les hébergements sont classés par ordre alphabétique.
+
   # ── Démarches administratives ───────────────────────────────────────────────
   - name: demarches
     label: Démarches

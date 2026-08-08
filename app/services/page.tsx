@@ -28,6 +28,12 @@ const SERVICES = [
     icone: "🏗️",
   },
   {
+    titre: "Hébergements",
+    description: "Où séjourner sur la commune : meublés de tourisme et chambres d'hôtes.",
+    href: "/hebergements",
+    icone: "🛏️",
+  },
+  {
     titre: "Contact & horaires",
     description: "Coordonnées de la mairie et horaires d'ouverture.",
     href: "/contact",

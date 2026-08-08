@@ -7,6 +7,7 @@ const PLAN_DU_SITE = [
   { label: "La Commune", href: "/commune" },
   { label: "Vos Élus", href: "/elus" },
   { label: "Services", href: "/services" },
+  { label: "Hébergements", href: "/hebergements" },
   { label: "Actualités", href: "/actualites" },
   { label: "Contact", href: "/contact" },
 ];
