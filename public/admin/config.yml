@@ -26,7 +26,7 @@ public_folder: /images/uploads
 
 # ─── Interface ───────────────────────────────────────────────────────────────
 
-locale: fr
+# Pas d'option `locale` : Sveltia l'ignore et suit la langue du navigateur.
 # Pré-production. À basculer sur https://lasaulsotte.fr lors de la mise en ligne.
 site_url: https://vicelo.github.io/Mairie-LaSaulsotte
 display_url: https://vicelo.github.io/Mairie-LaSaulsotte
