@@ -15,7 +15,8 @@
     "test:e2e:report": "playwright show-report",
     "prepare": "husky",
     "verify:cms": "node scripts/verifier-config-cms.mjs",
-    "serve:static": "serve out -l 3000"
+    "serve:static": "serve out -l 3000",
+    "donnees:actualiser": "node scripts/actualiser-donnees-publiques.mjs"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",

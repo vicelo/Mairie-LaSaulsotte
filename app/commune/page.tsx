@@ -3,6 +3,7 @@ import Image from "next/image";
 import { PageLayout } from "@/components/layout/PageLayout";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { COMMUNE, HAMEAUX, PATRIMOINE } from "@/lib/commune";
+import { DONNEES_PUBLIQUES, actualiseLeEnFrancais } from "@/lib/donnees-publiques";
 import { PHOTOS } from "@/lib/images";
 
 export const metadata: Metadata = {
@@ -15,9 +16,18 @@ export const metadata: Metadata = {
   },
 };
 
+// Population et superficie viennent de geo.api.gouv.fr plutôt que d'une valeur
+// saisie : ce sont les deux chiffres qui se périment le plus vite, et le site
+// affichait « environ 150 habitants » pour une commune qui en compte 677.
 const CHIFFRES = [
-  { label: "Population", valeur: `${COMMUNE.population} habitants (${COMMUNE.populationAnnee})` },
-  { label: "Superficie", valeur: `${COMMUNE.superficieKm2.toString().replace(".", ",")} km²` },
+  {
+    label: "Population",
+    valeur: `${DONNEES_PUBLIQUES.commune.population} habitants (${COMMUNE.populationAnnee})`,
+  },
+  {
+    label: "Superficie",
+    valeur: `${DONNEES_PUBLIQUES.commune.superficieKm2.toString().replace(".", ",")} km²`,
+  },
   { label: "Altitude", valeur: `${COMMUNE.altitudeMin} à ${COMMUNE.altitudeMax} m` },
   { label: "Code postal", valeur: COMMUNE.codePostal },
   { label: "Code INSEE", valeur: COMMUNE.codeInsee },
@@ -67,6 +77,19 @@ export default function CommunePage() {
             </div>
           ))}
         </dl>
+        <p className="mt-3 text-xs text-gray-500">
+          Population et superficie issues de{" "}
+          <a
+            href={`https://geo.api.gouv.fr/communes/${COMMUNE.codeInsee}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded underline hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary"
+          >
+            l&apos;API Découpage administratif
+            <span className="sr-only"> (s&apos;ouvre dans un nouvel onglet)</span>
+          </a>{" "}
+          — relevées le {actualiseLeEnFrancais()}.
+        </p>
       </section>
 
       {/* ── Histoire ──────────────────────────────────────────────────── */}

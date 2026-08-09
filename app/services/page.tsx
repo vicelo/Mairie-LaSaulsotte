@@ -28,6 +28,12 @@ const SERVICES = [
     icone: "🏗️",
   },
   {
+    titre: "Prévention et risques",
+    description: "Risques recensés sur la commune, bons réflexes et numéros d'urgence.",
+    href: "/prevention-risques",
+    icone: "⚠️",
+  },
+  {
     titre: "Hébergements",
     description: "Où séjourner sur la commune : meublés de tourisme et chambres d'hôtes.",
     href: "/hebergements",

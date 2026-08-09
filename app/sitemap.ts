@@ -18,6 +18,7 @@ const PAGES = [
   { chemin: "/elus", changeFrequency: "monthly", priority: 0.8 },
   { chemin: "/services", changeFrequency: "monthly", priority: 0.7 },
   { chemin: "/hebergements", changeFrequency: "monthly", priority: 0.7 },
+  { chemin: "/prevention-risques", changeFrequency: "yearly", priority: 0.6 },
   { chemin: "/urbanisme", changeFrequency: "monthly", priority: 0.7 },
   { chemin: "/vie-locale", changeFrequency: "monthly", priority: 0.7 },
   { chemin: "/contact", changeFrequency: "yearly", priority: 0.6 },

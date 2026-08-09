@@ -1,0 +1,59 @@
+{
+  "actualiseLe": "2026-08-09",
+  "commune": {
+    "codeInsee": "10367",
+    "nom": "La Saulsotte",
+    "population": 677,
+    "superficieKm2": 18.91
+  },
+  "risques": [
+    {
+      "code": "11",
+      "libelle": "Inondation",
+      "precisions": ["Par une crue à débordement lent de cours d'eau"]
+    },
+    {
+      "code": "12",
+      "libelle": "Mouvement de terrain",
+      "precisions": [
+        "Affaissements et effondrements d'origine anthropique (anciennes carrières souterraines, hors mines)",
+        "Tassements différentiels"
+      ]
+    },
+    {
+      "code": "22",
+      "libelle": "Nucléaire",
+      "precisions": []
+    },
+    {
+      "code": "23",
+      "libelle": "Rupture de barrage",
+      "precisions": []
+    },
+    {
+      "code": "24",
+      "libelle": "Transport de marchandises dangereuses",
+      "precisions": []
+    }
+  ],
+  "catastrophesNaturelles": [
+    {
+      "libelle": "Inondations et/ou Coulées de Boue",
+      "debut": "15/01/2018",
+      "fin": "05/02/2018",
+      "publicationJo": "10/03/2018"
+    },
+    {
+      "libelle": "Mouvement de Terrain",
+      "debut": "25/12/1999",
+      "fin": "29/12/1999",
+      "publicationJo": "30/12/1999"
+    },
+    {
+      "libelle": "Inondations et/ou Coulées de Boue",
+      "debut": "25/12/1999",
+      "fin": "29/12/1999",
+      "publicationJo": "30/12/1999"
+    }
+  ]
+}

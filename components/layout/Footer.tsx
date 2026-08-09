@@ -8,6 +8,7 @@ const PLAN_DU_SITE = [
   { label: "Vos Élus", href: "/elus" },
   { label: "Services", href: "/services" },
   { label: "Hébergements", href: "/hebergements" },
+  { label: "Prévention et risques", href: "/prevention-risques" },
   { label: "Actualités", href: "/actualites" },
   { label: "Contact", href: "/contact" },
 ];

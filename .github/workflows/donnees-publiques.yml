@@ -1,0 +1,42 @@
+name: Actualiser les données publiques
+
+# Les risques recensés et la population n'évoluent que rarement : une
+# vérification mensuelle suffit. Le workflow ne committe que si les données
+# ont réellement changé, pour ne pas déclencher un déploiement inutile.
+on:
+  schedule:
+    - cron: "0 4 1 * *" # le 1er de chaque mois, à 4 h UTC
+  workflow_dispatch: # déclenchement manuel depuis l'onglet Actions
+
+permissions:
+  contents: write
+
+jobs:
+  actualiser:
+    name: Interroger geo.api.gouv.fr et Géorisques
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Actualiser les données
+        run: npm run donnees:actualiser
+
+      - name: Committer si les données ont changé
+        run: |
+          if git diff --quiet -- content/donnees-publiques.json; then
+            echo "Aucune évolution des données publiques."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/donnees-publiques.json
+          git commit -m "Actualiser les données publiques de la commune
+
+          Mise à jour automatique depuis geo.api.gouv.fr et georisques.gouv.fr."
+          git push
