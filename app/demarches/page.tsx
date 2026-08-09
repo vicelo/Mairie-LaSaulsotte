@@ -26,18 +26,18 @@ export default function DemarchesPage() {
       />
 
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Démarches administratives</h1>
-        <p className="mt-2 text-gray-600">
+        <h1 className="text-[34px] leading-[1.1] nav:text-[52px]">Démarches administratives</h1>
+        <p className="mt-2 text-encre-courant">
           Retrouvez toutes les démarches accessibles auprès de la mairie de La Saulsotte.
         </p>
       </div>
 
       {/* Encart info pratique */}
-      <div className="mb-8 rounded-xl border border-primary-100 bg-primary-100 p-4 text-sm text-primary">
+      <div className="mb-8 border border-sable bg-sable-clair p-4 text-sm text-terre-fonce">
         <strong>Accueil en mairie :</strong> {HORAIRES_RESUME}. Tél.{" "}
         <a
           href={`tel:${MAIRIE.telephoneLien}`}
-          className="rounded underline hover:text-primary/80 focus:outline-none focus:ring-2 focus:ring-primary"
+          className="rounded underline hover:text-terre-fonce focus:outline-none focus:ring-2 focus:ring-terre-fonce"
         >
           {MAIRIE.telephone}
         </a>

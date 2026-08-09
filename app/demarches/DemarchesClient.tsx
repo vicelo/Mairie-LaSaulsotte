@@ -45,10 +45,10 @@ export default function DemarchesClient({ demarches }: Props) {
             onClick={() => setSelectedCategory(cat)}
             aria-pressed={selectedCategory === cat}
             className={[
-              "rounded-full border px-4 py-1.5 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
+              "rounded border px-4 py-1.5 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-terre-fonce focus:ring-offset-2",
               selectedCategory === cat
-                ? "border-primary bg-primary text-white"
-                : "border-gray-300 bg-white text-gray-700 hover:border-primary hover:text-primary",
+                ? "border-foret bg-foret text-white"
+                : "border-sable bg-surface text-encre-courant hover:border-foret hover:text-terre-fonce",
             ].join(" ")}
           >
             {cat}
@@ -61,7 +61,7 @@ export default function DemarchesClient({ demarches }: Props) {
       </div>
 
       {/* Liste accordéon */}
-      <dl className="divide-y divide-gray-200 rounded-xl border border-gray-200 bg-white">
+      <dl className="divide-y divide-sable border border-sable bg-surface">
         {filtered.map((demarche) => {
           const isOpen = openId === demarche.id;
           const badgeColor = CATEGORY_BADGE_COLORS[demarche.category] ?? "gray";
@@ -73,15 +73,15 @@ export default function DemarchesClient({ demarches }: Props) {
                   aria-expanded={isOpen}
                   aria-controls={`demarche-${demarche.id}`}
                   onClick={() => setOpenId(isOpen ? null : demarche.id)}
-                  className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
+                  className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left focus:outline-none focus:ring-2 focus:ring-inset focus:ring-terre-fonce"
                 >
                   <div className="flex flex-wrap items-center gap-3">
-                    <span className="font-medium text-gray-900">{demarche.title}</span>
+                    <span className="font-medium text-encre">{demarche.title}</span>
                     <Badge color={badgeColor}>{demarche.category}</Badge>
                   </div>
                   <svg
                     aria-hidden="true"
-                    className={`h-5 w-5 shrink-0 text-gray-400 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+                    className={`h-5 w-5 shrink-0 text-encre-secondaire transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -99,23 +99,23 @@ export default function DemarchesClient({ demarches }: Props) {
               <dd
                 id={`demarche-${demarche.id}`}
                 hidden={!isOpen}
-                className="border-t border-gray-100 bg-gray-50 px-5 py-4"
+                className="border-t border-sable-clair bg-surface px-5 py-4"
               >
-                <p className="mb-4 text-sm text-gray-700">{demarche.description}</p>
+                <p className="mb-4 text-sm text-encre-courant">{demarche.description}</p>
 
                 {demarche.delai && (
                   <p className="mb-3 text-sm">
-                    <span className="font-medium text-gray-600">Délai : </span>
+                    <span className="font-medium text-encre-courant">Délai : </span>
                     {demarche.delai}
                   </p>
                 )}
 
                 {demarche.documents && demarche.documents.length > 0 && (
                   <div className="mb-3">
-                    <p className="mb-1 text-sm font-medium text-gray-600">
+                    <p className="mb-1 text-sm font-medium text-encre-courant">
                       Documents nécessaires :
                     </p>
-                    <ul className="ml-4 list-disc space-y-1 text-sm text-gray-700">
+                    <ul className="ml-4 list-disc space-y-1 text-sm text-encre-courant">
                       {demarche.documents.map((doc, i) => (
                         <li key={i}>{doc}</li>
                       ))}
@@ -128,7 +128,7 @@ export default function DemarchesClient({ demarches }: Props) {
                     href={demarche.lienExterne}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 rounded text-sm font-medium text-primary underline hover:text-primary/80 focus:outline-none focus:ring-2 focus:ring-primary"
+                    className="inline-flex items-center gap-1 rounded text-sm font-medium text-terre-fonce underline hover:text-terre-fonce focus:outline-none focus:ring-2 focus:ring-terre-fonce"
                   >
                     Plus d&apos;informations sur service-public.fr
                     <svg

@@ -22,8 +22,8 @@ export default function HebergementsPage() {
     <PageLayout>
       <Breadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Hébergements" }]} />
 
-      <h1 className="mb-3 text-3xl font-bold text-gray-900">Hébergements</h1>
-      <p className="mb-10 max-w-2xl text-gray-600">
+      <h1 className="mb-4 text-[34px] leading-[1.1] nav:text-[52px]">Hébergements</h1>
+      <p className="mb-10 max-w-2xl text-encre-courant">
         Vous souhaitez séjourner à {COMMUNE.nom} ou y loger vos proches ? Voici les hébergements
         touristiques recensés sur la commune.
       </p>
@@ -39,23 +39,23 @@ export default function HebergementsPage() {
             {hebergements.map((h) => (
               <li
                 key={h.slug}
-                className="flex flex-col rounded-xl border border-gray-200 bg-white p-5 shadow-sm"
+                className="flex flex-col border border-sable bg-surface p-5 shadow-sm"
               >
-                <h3 className="font-semibold text-gray-900">{h.nom}</h3>
-                {h.type && <p className="mt-0.5 text-sm font-medium text-primary">{h.type}</p>}
+                <h3 className="font-semibold text-encre">{h.nom}</h3>
+                {h.type && <p className="mt-0.5 text-sm font-medium text-terre-fonce">{h.type}</p>}
 
-                <p className="mt-3 flex-1 text-sm text-gray-600">{h.description}</p>
+                <p className="mt-3 flex-1 text-sm text-encre-courant">{h.description}</p>
 
-                <dl className="mt-4 space-y-1 text-sm text-gray-600">
+                <dl className="mt-4 space-y-1 text-sm text-encre-courant">
                   {h.adresse && (
                     <div className="flex gap-2">
-                      <dt className="font-medium text-gray-700">Adresse :</dt>
+                      <dt className="font-medium text-encre-courant">Adresse :</dt>
                       <dd>{h.adresse}</dd>
                     </div>
                   )}
                   {h.capacite && (
                     <div className="flex gap-2">
-                      <dt className="font-medium text-gray-700">Capacité :</dt>
+                      <dt className="font-medium text-encre-courant">Capacité :</dt>
                       <dd>
                         {h.capacite} personne{h.capacite > 1 ? "s" : ""}
                       </dd>
@@ -63,11 +63,11 @@ export default function HebergementsPage() {
                   )}
                   {h.telephone && (
                     <div className="flex gap-2">
-                      <dt className="font-medium text-gray-700">Téléphone :</dt>
+                      <dt className="font-medium text-encre-courant">Téléphone :</dt>
                       <dd>
                         <a
                           href={`tel:${h.telephone.replace(/[^+\d]/g, "")}`}
-                          className="rounded text-primary underline hover:text-primary/80 focus:outline-none focus:ring-2 focus:ring-primary"
+                          className="rounded text-terre-fonce underline hover:text-terre-fonce focus:outline-none focus:ring-2 focus:ring-terre-fonce"
                         >
                           {h.telephone}
                         </a>
@@ -82,7 +82,7 @@ export default function HebergementsPage() {
                       href={h.lien}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex rounded text-sm font-medium text-primary underline hover:text-primary/80 focus:outline-none focus:ring-2 focus:ring-primary"
+                      className="inline-flex rounded text-sm font-medium text-terre-fonce underline hover:text-terre-fonce focus:outline-none focus:ring-2 focus:ring-terre-fonce"
                     >
                       Voir les disponibilités
                       <span className="sr-only">
@@ -96,7 +96,7 @@ export default function HebergementsPage() {
             ))}
           </ul>
         ) : (
-          <p className="text-gray-700">
+          <p className="text-encre-courant">
             Aucun hébergement n&apos;est recensé pour le moment. Renseignez-vous en mairie.
           </p>
         )}
@@ -104,23 +104,23 @@ export default function HebergementsPage() {
 
       {/* ── Se faire recenser ─────────────────────────────────────────── */}
       <section aria-labelledby="recensement-titre" className="mb-12">
-        <h2 id="recensement-titre" className="mb-4 text-2xl font-bold text-gray-800">
+        <h2 id="recensement-titre" className="mb-4 text-[26px] nav:text-[34px]">
           Vous louez un hébergement sur la commune ?
         </h2>
-        <div className="max-w-2xl rounded-xl border border-primary-100 bg-primary-100 p-5 text-sm text-primary">
+        <div className="max-w-2xl border border-sable bg-sable-clair p-5 text-sm text-terre-fonce">
           <p>
             Cette liste est tenue par la mairie. Pour y figurer, adressez-vous au secrétariat, par
             téléphone au{" "}
             <a
               href={`tel:${MAIRIE.telephoneLien}`}
-              className="rounded underline hover:text-primary/80 focus:outline-none focus:ring-2 focus:ring-primary"
+              className="rounded underline hover:text-terre-fonce focus:outline-none focus:ring-2 focus:ring-terre-fonce"
             >
               {MAIRIE.telephone}
             </a>
             , ou en{" "}
             <Link
               href="/contact"
-              className="rounded underline hover:text-primary/80 focus:outline-none focus:ring-2 focus:ring-primary"
+              className="rounded underline hover:text-terre-fonce focus:outline-none focus:ring-2 focus:ring-terre-fonce"
             >
               écrivant à la mairie
             </Link>
@@ -135,16 +135,16 @@ export default function HebergementsPage() {
 
       {/* ── Découvrir la commune ──────────────────────────────────────── */}
       <section aria-labelledby="decouvrir-titre">
-        <h2 id="decouvrir-titre" className="mb-4 text-2xl font-bold text-gray-800">
+        <h2 id="decouvrir-titre" className="mb-4 text-[26px] nav:text-[34px]">
           Découvrir la commune
         </h2>
-        <p className="max-w-2xl text-gray-700">
+        <p className="max-w-2xl text-encre-courant">
           {COMMUNE.nom} et ses hameaux comptent plusieurs édifices remarquables — l&apos;église
           Saint-Ferréol, le menhir de la Pierre Aiguë, le pigeonnier de Courtioux et la chapelle de
           Resson. À découvrir sur la page{" "}
           <Link
             href="/commune"
-            className="rounded text-primary underline hover:text-primary/80 focus:outline-none focus:ring-2 focus:ring-primary"
+            className="rounded text-terre-fonce underline hover:text-terre-fonce focus:outline-none focus:ring-2 focus:ring-terre-fonce"
           >
             La Commune
           </Link>

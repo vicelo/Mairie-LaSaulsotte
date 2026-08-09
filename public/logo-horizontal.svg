@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 72" role="img" aria-label="Mairie de La Saulsotte">
+  <title>Mairie de La Saulsotte</title>
+  <path d="M4 5 H44 V37 Q44 54 24 63 Q4 54 4 37 Z" fill="#2E4034"></path>
+  <path d="M9 10 H39 V36 Q39 49 24 56 Q9 49 9 36 Z" fill="none" stroke="#7E8F7C" stroke-width="1"></path>
+  <line x1="24" y1="48" x2="24" y2="18" stroke="#D8CDB4" stroke-width="1.6" stroke-linecap="round"></line>
+  <path d="M24 41 Q17 36 16 29 Q21 32 24 39 Z" fill="#B5643C"></path>
+  <path d="M24 34 Q18 29 18 23 Q22 26 24 32 Z" fill="#B5643C" opacity="0.85"></path>
+  <path d="M24 27 Q19 22 20 17 Q23 20 24 25 Z" fill="#B5643C" opacity="0.65"></path>
+  <path d="M24 41 Q31 36 32 29 Q27 32 24 39 Z" fill="#B5643C"></path>
+  <path d="M24 34 Q30 29 30 23 Q26 26 24 32 Z" fill="#B5643C" opacity="0.85"></path>
+  <path d="M24 27 Q29 22 28 17 Q25 20 24 25 Z" fill="#B5643C" opacity="0.65"></path>
+  <text x="60" y="27" font-family="Karla, Helvetica, Arial, sans-serif" font-size="10" letter-spacing="3.4" fill="#6E6A5C">MAIRIE DE</text>
+  <text x="58" y="52" font-family="&#39;Libre Baskerville&#39;, Georgia, serif" font-size="23" fill="#2E4034">La Saulsotte</text>
+  <line x1="59" y1="60" x2="296" y2="60" stroke="#B5643C" stroke-width="2"></line>
+</svg>

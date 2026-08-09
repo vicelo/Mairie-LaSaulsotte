@@ -4,311 +4,271 @@ import Image from "next/image";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { BannerAnnonce } from "@/components/ui/BannerAnnonce";
-import { Card } from "@/components/ui/Card";
-import { HorairesMairie } from "@/components/ui/HorairesMairie";
 import { getAnnoncesActives } from "@/lib/annonces";
 import { getAllActualites } from "@/lib/actualites";
 import { COMMUNE } from "@/lib/commune";
+import { getAllDemarches } from "@/lib/demarches";
 import { PHOTOS } from "@/lib/images";
 
 /** Nombre d'actualités mises en avant en page d'accueil. */
 const NB_ACTUALITES_HOME = 3;
 
-// ─── SEO ────────────────────────────────────────────────────────────────────
+/**
+ * Démarches mises en avant dans le bandeau vert, dans cet ordre.
+ *
+ * Choisies pour être les plus demandées en mairie, et non les premières par
+ * ordre alphabétique — qui donnaient trois actes d'état civil d'affilée.
+ */
+const DEMARCHES_EN_AVANT = [
+  "acte-naissance",
+  "inscription-listes-electorales",
+  "declaration-travaux",
+  "location-salle-fetes",
+  "urbanisme",
+];
+
+/**
+ * Illustrations de repli pour les actualités sans photo.
+ *
+ * Une seule image de repli produirait trois vignettes identiques côte à côte
+ * en page d'accueil ; la rotation évite cet effet.
+ */
+const ILLUSTRATIONS_REPLI = [PHOTOS.village02, PHOTOS.courtioux01, PHOTOS.aireDeJeux];
 
 export const metadata: Metadata = {
   title: "Mairie de La Saulsotte — Commune de l'Aube (10)",
   description:
-    "Site officiel de la mairie de La Saulsotte, commune de l'Aube (10), 677 habitants (2023). Retrouvez les informations pratiques, les actualités et les services aux habitants.",
+    "Site officiel de la mairie de La Saulsotte, commune de l'Aube (10). Démarches, horaires, actualités et vie du village.",
   openGraph: {
     title: "Mairie de La Saulsotte — Commune de l'Aube (10)",
     description:
-      "Site officiel de la mairie de La Saulsotte. Informations pratiques, actualités et services aux habitants.",
+      "Le site de votre mairie : vos démarches, la vie du village et les informations pratiques.",
     locale: "fr_FR",
     type: "website",
   },
 };
 
-// ─── Données réelles ─────────────────────────────────────────────────────────
-//
-// Les annonces et les actualités proviennent du CMS (content/annonces,
-// content/actualites) — voir getAnnoncesActives() et getAllActualites().
-
 const ACCES_RAPIDES = [
-  {
-    label: "Démarches",
-    href: "/demarches",
-    icon: (
-      <svg
-        aria-hidden="true"
-        className="h-7 w-7"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={1.5}
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25z"
-        />
-      </svg>
-    ),
-  },
-  {
-    label: "PLU",
-    href: "/urbanisme",
-    icon: (
-      <svg
-        aria-hidden="true"
-        className="h-7 w-7"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={1.5}
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z"
-        />
-      </svg>
-    ),
-  },
-  {
-    label: "Eau potable",
-    href: "/demarches",
-    icon: (
-      <svg
-        aria-hidden="true"
-        className="h-7 w-7"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={1.5}
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M12 3c-4.97 4.97-6 8.17-6 10.5a6 6 0 0012 0C18 11.17 16.97 7.97 12 3z"
-        />
-      </svg>
-    ),
-  },
-  {
-    label: "État civil",
-    href: "/demarches",
-    icon: (
-      <svg
-        aria-hidden="true"
-        className="h-7 w-7"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={1.5}
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z"
-        />
-      </svg>
-    ),
-  },
-  {
-    label: "Permis & urbanisme",
-    href: "/urbanisme",
-    icon: (
-      <svg
-        aria-hidden="true"
-        className="h-7 w-7"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={1.5}
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z"
-        />
-      </svg>
-    ),
-  },
-  {
-    label: "Contact",
-    href: "/contact",
-    icon: (
-      <svg
-        aria-hidden="true"
-        className="h-7 w-7"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={1.5}
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
-        />
-      </svg>
-    ),
-  },
+  { label: "Démarches", detail: "État civil, urbanisme, inscriptions", href: "/demarches" },
+  { label: "Horaires", detail: "Lundi, mercredi, jeudi, samedi", href: "/contact" },
+  { label: "Actualités", detail: "Travaux, festivités, conseil", href: "/actualites" },
+  { label: "Vos élus", detail: "Conseil municipal et permanences", href: "/elus" },
 ];
 
-// ─── Page ────────────────────────────────────────────────────────────────────
+/** Date d'une actualité en « 12 juin », pour les cartes. */
+function dateCourte(iso: string): string {
+  if (!iso) return "";
+  const [annee, mois, jour] = iso.split("-").map(Number);
+  return new Intl.DateTimeFormat("fr-FR", { day: "numeric", month: "long" }).format(
+    new Date(Date.UTC(annee, mois - 1, jour))
+  );
+}
 
 export default function HomePage() {
   const annonces = getAnnoncesActives();
   const actualites = getAllActualites().slice(0, NB_ACTUALITES_HOME);
+  // Les démarches retenues d'abord, dans l'ordre voulu ; complété si l'une
+  // d'elles a été dépubliée depuis le CMS.
+  const toutesDemarches = getAllDemarches();
+  const demarches = [
+    ...DEMARCHES_EN_AVANT.map((id) => toutesDemarches.find((d) => d.id === id)).filter(
+      (d): d is NonNullable<typeof d> => Boolean(d)
+    ),
+    ...toutesDemarches.filter((d) => !DEMARCHES_EN_AVANT.includes(d.id)),
+  ].slice(0, DEMARCHES_EN_AVANT.length);
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-creme">
       <Header />
-
-      {/* Bandeau annonces — pleine largeur */}
       <BannerAnnonce annonces={annonces} />
 
       <main id="contenu-principal" tabIndex={-1} className="flex-1">
-        {/* ── Hero ──────────────────────────────────────────────────────── */}
-        <section
-          aria-labelledby="hero-titre"
-          className="relative isolate overflow-hidden bg-primary"
-        >
-          {/* Photographie du village — décorative, le sens est porté par le titre */}
-          <Image
-            src={PHOTOS.villagePanorama.src}
-            alt=""
-            aria-hidden="true"
-            fill
-            priority
-            sizes="100vw"
-            className="absolute inset-0 object-cover"
-          />
+        {/* ── Héro ──────────────────────────────────────────────────────── */}
+        <section aria-labelledby="hero-titre">
+          <div className="relative h-[300px] w-full nav:h-[560px]">
+            <Image
+              src={PHOTOS.villagePanorama.src}
+              alt={PHOTOS.villagePanorama.alt}
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover"
+            />
+          </div>
 
-          {/* Voile assurant le contraste RGAA du texte sur la photo.
-              85 % est le compromis retenu : mesuré sur le pire cas (le ciel,
-              zone la plus claire du cliché), il garantit 5,2:1 au texte blanc
-              — au-dessus du seuil AA de 4,5:1 — tout en laissant le village
-              transparaître. Au-delà de 90 %, la photo disparaît sous l'aplat
-              et n'apporte plus rien. */}
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 bg-gradient-to-b from-primary/85 via-primary/85 to-primary/90"
-          />
-
-          <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
-            <div className="max-w-2xl">
-              {/* Blanc et non accent : l'orange de la charte ne dépasse pas
-                  2,8:1 sur le voile vert, très en deçà du seuil AA. */}
-              <p className="text-sm font-semibold uppercase tracking-widest text-white">
-                Site officiel
+          <div className="contenu">
+            {/* Le bloc remonte sur la photo au-delà de 900 px ; en dessous il
+                se pose simplement à la suite, comme prévu au handoff. */}
+            <div className="relative max-w-[720px] border-t-[3px] border-terre bg-creme px-7 pb-8 pt-9 nav:-mt-[140px] nav:px-16 nav:pb-12 nav:pt-14">
+              <p className="surtitre">
+                Commune de l&apos;{COMMUNE.departement} — {COMMUNE.codePostal}
               </p>
               <h1
                 id="hero-titre"
-                className="mt-3 text-4xl font-bold leading-tight text-white sm:text-5xl"
+                className="mt-4 text-[34px] leading-[1.08] tracking-[-0.01em] nav:text-[58px]"
               >
-                Commune de La Saulsotte
+                Bienvenue à
+                <br />
+                {COMMUNE.nom}
               </h1>
-              {/* Blanc plutôt que primary-100, qui ne tient que 4,1:1 sur ce
-                  voile — sous le seuil pour ce texte de 18 px non gras. */}
-              <p className="mt-3 text-lg text-white">
-                {COMMUNE.departement} ({COMMUNE.departementNumero}) — {COMMUNE.population} habitants
-                ({COMMUNE.populationAnnee})
+              <p className="mt-5 max-w-[62ch] text-[17px] leading-[1.65] text-encre-courant nav:text-[19px]">
+                Le site de votre mairie : vos démarches, la vie du village et les informations
+                pratiques, réunis en un seul endroit.
               </p>
-
-              {/* CTAs rapides */}
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Link
-                  href="/contact#horaires"
-                  className="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-accent px-6 py-3 text-base font-semibold text-gray-900 transition-colors duration-150 hover:bg-accent-dark hover:text-white focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
-                >
-                  Horaires mairie
-                </Link>
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center justify-center gap-2 rounded-md border border-white bg-white px-6 py-3 text-base font-medium text-primary transition-colors duration-150 hover:bg-primary-100 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                >
-                  Contact
-                </Link>
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center justify-center gap-2 rounded-md border border-white bg-white px-6 py-3 text-base font-medium text-primary transition-colors duration-150 hover:bg-primary-100 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                >
-                  Urgences
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ── Horaires de la mairie ─────────────────────────────────────── */}
-        <section id="horaires" aria-labelledby="horaires-titre" className="bg-white py-12">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="mx-auto max-w-xl">
-              <HorairesMairie titleId="horaires-titre" />
-            </div>
-          </div>
-        </section>
-
-        {/* ── Actualités ───────────────────────────────────────────────── */}
-        <section aria-labelledby="actualites-titre" className="bg-gray-50 py-14">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between gap-4">
-              <h2 id="actualites-titre" className="text-2xl font-bold text-gray-900">
-                Actualités
-              </h2>
-              <Link
-                href="/actualites"
-                aria-label="Voir toutes les actualités"
-                className="rounded text-sm font-medium text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary"
-              >
-                Voir toutes les actualités →
-              </Link>
-            </div>
-
-            <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {actualites.map((actu) => (
-                <Card
-                  key={actu.slug}
-                  title={actu.title}
-                  excerpt={actu.excerpt}
-                  date={actu.date}
-                  category={actu.category}
-                  href={`/actualites/${actu.slug}`}
-                  imageSrc={actu.image}
-                  imageAlt=""
-                />
-              ))}
             </div>
           </div>
         </section>
 
         {/* ── Accès rapides ─────────────────────────────────────────────── */}
-        <section aria-labelledby="acces-titre" className="bg-white py-14">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <h2 id="acces-titre" className="text-2xl font-bold text-gray-900">
-              Accès rapides
-            </h2>
+        <section aria-labelledby="acces-titre" className="contenu pt-16 nav:pt-24">
+          <h2 id="acces-titre" className="sr-only">
+            Accès rapides
+          </h2>
+          {/* Le gap de 1 px sur fond sable dessine les filets entre tuiles. */}
+          <ul
+            role="list"
+            className="grid gap-px border border-sable bg-sable etroit:grid-cols-2 nav:grid-cols-4"
+          >
+            {ACCES_RAPIDES.map((acces) => (
+              <li key={acces.href} className="bg-surface transition-colors hover:bg-white">
+                <Link
+                  href={acces.href}
+                  className="block h-full px-7 py-8 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-terre-fonce"
+                >
+                  <span className="block font-serif text-xl text-encre">{acces.label}</span>
+                  <span className="mt-2 block text-sm text-encre-secondaire">{acces.detail}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
 
-            <ul role="list" className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-              {ACCES_RAPIDES.map((item) => (
-                <li key={item.href}>
+        {/* ── La vie du village ─────────────────────────────────────────── */}
+        {actualites.length > 0 && (
+          <section aria-labelledby="actus-titre" className="contenu pt-[96px] nav:pt-[110px]">
+            <div className="flex flex-wrap items-baseline justify-between gap-4 border-b border-sable pb-5">
+              <h2 id="actus-titre" className="text-[26px] nav:text-[34px]">
+                La vie du village
+              </h2>
+              <Link
+                href="/actualites"
+                className="text-sm text-terre-fonce underline-offset-4 hover:underline focus:outline-none focus:ring-2 focus:ring-terre-fonce"
+              >
+                Toutes les actualités →
+              </Link>
+            </div>
+
+            <ul role="list" className="mt-9 grid gap-8 nav:grid-cols-3">
+              {actualites.map((actu, index) => {
+                const repli = ILLUSTRATIONS_REPLI[index % ILLUSTRATIONS_REPLI.length];
+                return (
+                  <li key={actu.slug}>
+                    <article>
+                      <Link
+                        href={`/actualites/${actu.slug}`}
+                        className="group block focus:outline-none focus:ring-2 focus:ring-terre-fonce"
+                      >
+                        <div className="relative h-[220px] w-full overflow-hidden bg-sable-clair">
+                          <Image
+                            src={actu.image ?? repli.src}
+                            alt=""
+                            fill
+                            sizes="(max-width: 900px) 100vw, 33vw"
+                            className="object-cover"
+                          />
+                        </div>
+                        <p className="surtitre mt-5">
+                          {dateCourte(actu.date)}
+                          {actu.category ? ` — ${actu.category}` : ""}
+                        </p>
+                        <h3 className="mt-2 text-[22px] leading-[1.3] text-encre group-hover:text-terre-fonce">
+                          {actu.title}
+                        </h3>
+                        <p className="mt-3 text-[15px] leading-[1.7] text-encre-courant">
+                          {actu.excerpt}
+                        </p>
+                      </Link>
+                    </article>
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        )}
+
+        {/* ── Bandeau démarches ─────────────────────────────────────────── */}
+        <section
+          aria-labelledby="demarches-titre"
+          className="mt-[96px] bg-foret py-20 text-foret-texte nav:mt-[110px] nav:py-24"
+        >
+          <div className="contenu grid gap-12 nav:grid-cols-2 nav:gap-20">
+            <div>
+              <p className="surtitre-clair">Vos démarches</p>
+              <h2
+                id="demarches-titre"
+                className="mt-4 text-[26px] text-foret-texteFort nav:text-[34px]"
+              >
+                Ce que vous pouvez faire sans vous déplacer
+              </h2>
+              <p className="mt-5 max-w-[46ch] text-[15px] leading-[1.7]">
+                La plupart des demandes courantes se préparent en ligne. Le secrétariat reste à
+                votre disposition pour tout accompagnement.
+              </p>
+              <Link
+                href="/demarches"
+                className="mt-8 inline-block bg-terre-fonce px-6 py-3 text-[15px] text-white transition-colors hover:bg-terre-clair hover:text-encre focus:outline-none focus:ring-2 focus:ring-foret-texte focus:ring-offset-2 focus:ring-offset-foret"
+              >
+                Voir toutes les démarches
+              </Link>
+            </div>
+
+            <ul role="list" className="self-center">
+              {demarches.map((demarche) => (
+                <li
+                  key={demarche.id}
+                  className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b border-foret-filet py-4 first:pt-0"
+                >
                   <Link
-                    href={item.href}
-                    className="group flex flex-col items-center gap-3 rounded-xl border border-gray-200 bg-gray-50 p-5 text-center transition-all hover:border-primary hover:bg-primary-100 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                    href={`/demarches#${demarche.id}`}
+                    className="text-[15px] text-foret-texteFort underline-offset-4 hover:underline focus:outline-none focus:ring-2 focus:ring-foret-texte"
                   >
-                    <span className="text-primary transition-transform duration-200 group-hover:scale-110">
-                      {item.icon}
-                    </span>
-                    <span className="text-sm font-medium text-gray-700 group-hover:text-primary">
-                      {item.label}
-                    </span>
+                    {demarche.title}
                   </Link>
+                  <span className="text-[13px] text-foret-texte">{demarche.category}</span>
                 </li>
               ))}
             </ul>
+          </div>
+        </section>
+
+        {/* ── Découvrir la commune ──────────────────────────────────────── */}
+        <section aria-labelledby="decouvrir-titre" className="contenu py-20 nav:py-24">
+          <div className="grid items-center gap-12 nav:grid-cols-2 nav:gap-16">
+            <div className="relative h-[300px] w-full nav:h-[420px]">
+              <Image
+                src={PHOTOS.village01.src}
+                alt={PHOTOS.village01.alt}
+                fill
+                sizes="(max-width: 900px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </div>
+            <div>
+              <p className="surtitre">Découvrir</p>
+              <h2 id="decouvrir-titre" className="mt-4 text-[26px] nav:text-[34px]">
+                Un village de plaine, entre Seine et grandes cultures
+              </h2>
+              <p className="mt-5 max-w-[52ch] text-[15px] leading-[1.7] text-encre-courant">
+                Situation, patrimoine, associations et vie quotidienne : tout ce qui fait le
+                caractère de {COMMUNE.nom} et de ses {COMMUNE.population} habitants.
+              </p>
+              <Link
+                href="/commune"
+                className="mt-8 inline-block border border-foret px-6 py-3 text-[15px] text-foret transition-colors hover:bg-foret hover:text-creme focus:outline-none focus:ring-2 focus:ring-terre-fonce focus:ring-offset-2 focus:ring-offset-creme"
+              >
+                Découvrir la commune
+              </Link>
+            </div>
           </div>
         </section>
       </main>

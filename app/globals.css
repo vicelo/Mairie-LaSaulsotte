@@ -2,25 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #1a1a1a;
-
-  /* Design tokens — Mairie de La Saulsotte */
-  --color-primary: #2a6010;
-  --color-primary-100: #d4edbc;
-  --color-accent: #f89522;
-  --color-accent-dark: #c44e17;
-
-  --font-sans: "Inter", system-ui, sans-serif;
-  --font-heading: "Georgia", serif;
-}
-
 @layer base {
   body {
-    color: var(--foreground);
-    background: var(--background);
-    font-family: var(--font-sans);
     @apply antialiased;
   }
 
@@ -30,8 +13,42 @@
   h4,
   h5,
   h6 {
-    font-family: var(--font-heading);
-    @apply font-bold;
+    @apply font-serif text-encre;
+  }
+
+  /* Le crème du fond doit remonter jusque sous la barre du navigateur
+     lorsqu'on dépasse le bas de page. */
+  html {
+    @apply bg-creme;
+  }
+}
+
+@layer components {
+  /**
+   * Sur-titre en capitales espacées, au-dessus des titres de section.
+   * Terre cuite foncée et non l'accent clair : ce dernier ne tient que
+   * 3,84:1 sur le crème, sous le seuil AA pour un texte de 12 px.
+   */
+  .surtitre {
+    @apply text-xs font-semibold uppercase tracking-surtitre text-terre-fonce;
+  }
+
+  /** Sur-titre posé sur un aplat vert. */
+  .surtitre-clair {
+    @apply text-xs font-semibold uppercase tracking-surtitre text-foret-texte;
+  }
+
+  /** Conteneur de contenu, largeur et gouttières du handoff. */
+  .contenu {
+    @apply mx-auto w-full max-w-contenu px-8;
+  }
+
+  /**
+   * Trame rayée des visuels manquants (portraits d'élus, plan d'accès).
+   * À retirer au fur et à mesure que les vraies photographies arrivent.
+   */
+  .placeholder-raye {
+    background-image: repeating-linear-gradient(45deg, #e7e0d0 0 12px, #ddd4c0 12px 24px);
   }
 }
 

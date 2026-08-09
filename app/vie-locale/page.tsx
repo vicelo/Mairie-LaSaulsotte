@@ -83,32 +83,29 @@ export default function VieLocalePage() {
     <PageLayout>
       <Breadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Vie locale" }]} />
 
-      <h1 className="mb-3 text-3xl font-bold text-gray-900">Vie locale</h1>
-      <p className="mb-10 max-w-2xl text-gray-600">
+      <h1 className="mb-4 text-[34px] leading-[1.1] nav:text-[52px]">Vie locale</h1>
+      <p className="mb-10 max-w-2xl text-encre-courant">
         Les associations, l&apos;école, l&apos;accueil de loisirs et le point lecture qui font vivre
         la commune au quotidien.
       </p>
 
       {/* ── Enfance et éducation ──────────────────────────────────────── */}
       <section aria-labelledby="enfance-titre" className="mb-12">
-        <h2 id="enfance-titre" className="mb-6 text-2xl font-bold text-gray-800">
+        <h2 id="enfance-titre" className="mb-6 text-[26px] nav:text-[34px]">
           Enfance et éducation
         </h2>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           {ENFANCE.map((service) => (
-            <article
-              key={service.titre}
-              className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm"
-            >
-              <h3 className="mb-1 font-semibold text-gray-900">{service.titre}</h3>
-              <p className="mb-3 text-sm text-gray-600">{service.responsable}</p>
-              <address className="space-y-1 text-sm not-italic text-gray-600">
+            <article key={service.titre} className="border border-sable bg-surface p-5 shadow-sm">
+              <h3 className="mb-1 font-semibold text-encre">{service.titre}</h3>
+              <p className="mb-3 text-sm text-encre-courant">{service.responsable}</p>
+              <address className="space-y-1 text-sm not-italic text-encre-courant">
                 <p>{service.adresse}</p>
                 <p>
                   Tél.{" "}
                   <a
                     href={`tel:${service.telephoneLien}`}
-                    className="rounded text-primary underline hover:text-primary/80 focus:outline-none focus:ring-2 focus:ring-primary"
+                    className="rounded text-terre-fonce underline hover:text-terre-fonce focus:outline-none focus:ring-2 focus:ring-terre-fonce"
                   >
                     {service.telephone}
                   </a>
@@ -116,7 +113,7 @@ export default function VieLocalePage() {
                 <p>
                   <a
                     href={`mailto:${service.email}`}
-                    className="break-all rounded text-primary underline hover:text-primary/80 focus:outline-none focus:ring-2 focus:ring-primary"
+                    className="break-all rounded text-terre-fonce underline hover:text-terre-fonce focus:outline-none focus:ring-2 focus:ring-terre-fonce"
                   >
                     {service.email}
                   </a>
@@ -125,7 +122,7 @@ export default function VieLocalePage() {
             </article>
           ))}
         </div>
-        <p className="mt-4 text-sm text-gray-500">
+        <p className="mt-4 text-sm text-encre-secondaire">
           Inscriptions scolaires, cantine, périscolaire et transports scolaires : renseignements en
           mairie.
         </p>
@@ -133,17 +130,17 @@ export default function VieLocalePage() {
 
       {/* ── Point lecture ─────────────────────────────────────────────── */}
       <section aria-labelledby="lecture-titre" className="mb-12">
-        <h2 id="lecture-titre" className="mb-6 text-2xl font-bold text-gray-800">
+        <h2 id="lecture-titre" className="mb-6 text-[26px] nav:text-[34px]">
           Point lecture
         </h2>
-        <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
-          <p className="text-sm text-gray-600">
+        <div className="border border-sable bg-surface p-5 shadow-sm">
+          <p className="text-sm text-encre-courant">
             La commune dispose d&apos;un point lecture ouvert aux habitants, avec inscription
             possible pour les jeunes et les adultes. Pour connaître les horaires d&apos;ouverture au
             public et les modalités d&apos;inscription, contactez la mairie au{" "}
             <a
               href={`tel:${MAIRIE.telephoneLien}`}
-              className="rounded text-primary underline hover:text-primary/80 focus:outline-none focus:ring-2 focus:ring-primary"
+              className="rounded text-terre-fonce underline hover:text-terre-fonce focus:outline-none focus:ring-2 focus:ring-terre-fonce"
             >
               {MAIRIE.telephone}
             </a>
@@ -154,30 +151,27 @@ export default function VieLocalePage() {
 
       {/* ── Associations ──────────────────────────────────────────────── */}
       <section aria-labelledby="asso-titre" className="mb-12">
-        <h2 id="asso-titre" className="mb-6 text-2xl font-bold text-gray-800">
+        <h2 id="asso-titre" className="mb-6 text-[26px] nav:text-[34px]">
           Associations
         </h2>
-        <p className="mb-4 max-w-2xl text-gray-600">
+        <p className="mb-4 max-w-2xl text-encre-courant">
           La commune compte plusieurs associations actives. Pour les rejoindre ou obtenir leurs
           coordonnées, renseignez-vous en mairie.
         </p>
-        <ul
-          role="list"
-          className="divide-y divide-gray-200 rounded-xl border border-gray-200 bg-white"
-        >
+        <ul role="list" className="divide-y divide-sable border border-sable bg-surface">
           {ASSOCIATIONS.map((asso) => (
             <li key={asso.nom} className="px-5 py-4">
-              <h3 className="mb-1 font-semibold text-gray-900">{asso.nom}</h3>
-              <p className="text-sm text-gray-600">{asso.description}</p>
+              <h3 className="mb-1 font-semibold text-encre">{asso.nom}</h3>
+              <p className="text-sm text-encre-courant">{asso.description}</p>
             </li>
           ))}
         </ul>
 
-        <div className="mt-4 rounded-xl border border-primary-100 bg-primary-100 p-4 text-sm text-primary">
+        <div className="mt-4 border border-sable bg-sable-clair p-4 text-sm text-terre-fonce">
           Vous souhaitez créer une association ou déclarer votre association en mairie ?{" "}
           <Link
             href="/contact"
-            className="rounded underline hover:text-primary/80 focus:outline-none focus:ring-2 focus:ring-primary"
+            className="rounded underline hover:text-terre-fonce focus:outline-none focus:ring-2 focus:ring-terre-fonce"
           >
             Contactez-nous
           </Link>
@@ -187,12 +181,12 @@ export default function VieLocalePage() {
 
       {/* ── Vie intercommunale ────────────────────────────────────────── */}
       <section aria-labelledby="interco-titre">
-        <h2 id="interco-titre" className="mb-6 text-2xl font-bold text-gray-800">
+        <h2 id="interco-titre" className="mb-6 text-[26px] nav:text-[34px]">
           Vie intercommunale
         </h2>
-        <p className="max-w-2xl text-gray-600">
+        <p className="max-w-2xl text-encre-courant">
           La Saulsotte fait partie de la{" "}
-          <strong className="font-semibold text-gray-900">{COMMUNE.intercommunalite}</strong>, qui
+          <strong className="font-semibold text-encre">{COMMUNE.intercommunalite}</strong>, qui
           exerce des compétences en matière de développement économique, d&apos;aménagement du
           territoire et de services à la population. L&apos;office de tourisme du Nogentais informe
           par ailleurs sur les activités et le patrimoine du secteur.

@@ -47,10 +47,10 @@ export default function ActualitesClient({ actualites }: Props) {
             onClick={() => handleCategoryChange(cat)}
             aria-pressed={selectedCategory === cat}
             className={[
-              "rounded-full border px-4 py-2.5 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
+              "rounded border px-4 py-2.5 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-terre-fonce focus:ring-offset-2",
               selectedCategory === cat
-                ? "border-primary bg-primary text-white"
-                : "border-gray-300 bg-white text-gray-700 hover:border-primary hover:text-primary",
+                ? "border-foret bg-foret text-white"
+                : "border-sable bg-surface text-encre-courant hover:border-foret hover:text-terre-fonce",
             ].join(" ")}
           >
             {cat}
@@ -59,7 +59,9 @@ export default function ActualitesClient({ actualites }: Props) {
       </div>
 
       {paginated.length === 0 ? (
-        <p className="py-12 text-center text-gray-500">Aucune actualité dans cette catégorie.</p>
+        <p className="py-12 text-center text-encre-secondaire">
+          Aucune actualité dans cette catégorie.
+        </p>
       ) : (
         <>
           <div aria-live="polite" aria-atomic="true" className="sr-only">
@@ -90,11 +92,11 @@ export default function ActualitesClient({ actualites }: Props) {
                 onClick={() => setPage((p) => Math.max(1, p - 1))}
                 disabled={page === 1}
                 aria-label="Page précédente"
-                className="rounded-md border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:border-primary hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-40"
+                className="rounded-md border border-sable px-3 py-2 text-sm font-medium text-encre-courant transition-colors hover:border-foret hover:text-terre-fonce focus:outline-none focus:ring-2 focus:ring-terre-fonce focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-40"
               >
                 ← Précédent
               </button>
-              <span className="text-sm text-gray-600">
+              <span className="text-sm text-encre-courant">
                 Page {page} sur {totalPages}
               </span>
               <button
@@ -102,7 +104,7 @@ export default function ActualitesClient({ actualites }: Props) {
                 onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                 disabled={page === totalPages}
                 aria-label="Page suivante"
-                className="rounded-md border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:border-primary hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-40"
+                className="rounded-md border border-sable px-3 py-2 text-sm font-medium text-encre-courant transition-colors hover:border-foret hover:text-terre-fonce focus:outline-none focus:ring-2 focus:ring-terre-fonce focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-40"
               >
                 Suivant →
               </button>

@@ -4,6 +4,12 @@ import { test, expect } from "@playwright/test";
  * Tests E2E — Responsive (mobile, tablette, desktop)
  */
 
+/**
+ * Point de rupture de la navigation, fixé par la direction artistique.
+ * La tablette à 768 px passe donc en menu déroulant, comme le mobile.
+ */
+const RUPTURE_NAV = 900;
+
 const VIEWPORTS = [
   { name: "mobile", width: 375, height: 812 },
   { name: "tablette", width: 768, height: 1024 },
@@ -26,9 +32,8 @@ for (const viewport of VIEWPORTS) {
       });
     }
 
-    // Tailwind md: = ≥ 768px → hamburger masqué à partir de 768px
-    if (viewport.width < 768) {
-      test("Menu hamburger visible sur mobile", async ({ page }) => {
+    if (viewport.width < RUPTURE_NAV) {
+      test("Menu déroulant disponible sous le point de rupture", async ({ page }) => {
         await page.goto("/");
         const hamburger = page.locator('button[aria-controls="menu-mobile"]');
         await expect(hamburger).toBeVisible();
@@ -36,11 +41,13 @@ for (const viewport of VIEWPORTS) {
         await expect(page.locator("#menu-mobile")).toBeVisible();
       });
     } else {
-      test("Navigation desktop visible", async ({ page }) => {
+      test("Navigation déployée au-dessus du point de rupture", async ({ page }) => {
         await page.goto("/");
-        // Sur ≥768px, le bouton hamburger est masqué
-        const hamburger = page.locator('button[aria-controls="menu-mobile"]');
-        await expect(hamburger).toBeHidden();
+        const bouton = page.locator('button[aria-controls="menu-mobile"]');
+        await expect(bouton).toBeHidden();
+        // Les entrées de navigation sont alors directement accessibles.
+        // `trailingSlash` étant actif, l'attribut vaut « /commune/ ».
+        await expect(page.locator('nav a[href^="/commune"]').first()).toBeVisible();
       });
     }
   });

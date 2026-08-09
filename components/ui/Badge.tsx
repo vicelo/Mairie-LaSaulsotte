@@ -9,12 +9,12 @@ interface BadgeProps {
 }
 
 const COLOR_CLASSES: Record<BadgeColor, string> = {
-  green: "bg-primary-100 text-primary",
+  green: "bg-sable-clair text-terre-fonce",
   // accent-dark ne donne que 4,12:1 sur orange-100 — insuffisant pour ce
   // texte de 12 px, d'où orange-900.
-  orange: "bg-orange-100 text-orange-900",
-  gray: "bg-gray-100 text-gray-700",
-  blue: "bg-blue-100 text-blue-700",
+  orange: "bg-sable-clair text-terre-fonce",
+  gray: "bg-sable-clair text-encre-courant",
+  blue: "bg-sable-clair text-foret",
 };
 
 /**
@@ -25,7 +25,7 @@ export function Badge({ children, color = "green", className = "" }: BadgeProps)
   return (
     <span
       className={[
-        "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium",
+        "inline-flex items-center rounded px-2.5 py-0.5 text-xs font-medium",
         COLOR_CLASSES[color],
         className,
       ].join(" ")}

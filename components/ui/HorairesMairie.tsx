@@ -16,49 +16,51 @@ interface HorairesMairieProps {
  */
 export function HorairesMairie({ avecCoordonnees = true, titleId }: HorairesMairieProps) {
   return (
-    <div className="rounded-2xl border border-gray-200 bg-gray-50 p-6 shadow-sm sm:p-8">
-      <h2 id={titleId} className="text-xl font-bold text-primary">
+    <div className="border border-sable bg-surface p-6 shadow-sm sm:p-8">
+      <h2 id={titleId} className="text-xl font-bold text-terre-fonce">
         Horaires de la mairie
       </h2>
 
-      <dl className="mt-5 space-y-3 text-sm text-gray-700">
+      <dl className="mt-5 space-y-3 text-sm text-encre-courant">
         {HORAIRES.map((creneau) => (
           <div
             key={creneau.jours}
-            className="flex flex-wrap justify-between gap-x-4 gap-y-1 border-b border-gray-200 pb-2 last:border-b-0"
+            className="flex flex-wrap justify-between gap-x-4 gap-y-1 border-b border-sable pb-2 last:border-b-0"
           >
             <dt className="font-medium">{creneau.jours}</dt>
             <dd className="text-right">
               {creneau.horaire}
               {creneau.precision && (
-                <span className="block text-xs font-normal text-gray-500">{creneau.precision}</span>
+                <span className="block text-xs font-normal text-encre-secondaire">
+                  {creneau.precision}
+                </span>
               )}
             </dd>
           </div>
         ))}
       </dl>
 
-      <p className="mt-4 text-xs text-gray-500">Fermée les mardi, vendredi et dimanche.</p>
+      <p className="mt-4 text-xs text-encre-secondaire">Fermée les mardi, vendredi et dimanche.</p>
 
       {avecCoordonnees && (
-        <address className="mt-5 space-y-2 border-t border-gray-200 pt-5 text-sm not-italic">
+        <address className="mt-5 space-y-2 border-t border-sable pt-5 text-sm not-italic">
           <p>
-            <span className="font-medium text-gray-600">Adresse :</span> {ADRESSE_COMPLETE}
+            <span className="font-medium text-encre-courant">Adresse :</span> {ADRESSE_COMPLETE}
           </p>
           <p>
-            <span className="font-medium text-gray-600">Tél. :</span>{" "}
+            <span className="font-medium text-encre-courant">Tél. :</span>{" "}
             <a
               href={`tel:${MAIRIE.telephoneLien}`}
-              className="rounded text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary"
+              className="rounded text-terre-fonce hover:underline focus:outline-none focus:ring-2 focus:ring-terre-fonce"
             >
               {MAIRIE.telephone}
             </a>
           </p>
           <p>
-            <span className="font-medium text-gray-600">Courriel :</span>{" "}
+            <span className="font-medium text-encre-courant">Courriel :</span>{" "}
             <a
               href={`mailto:${MAIRIE.email}`}
-              className="break-all rounded text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary"
+              className="break-all rounded text-terre-fonce hover:underline focus:outline-none focus:ring-2 focus:ring-terre-fonce"
             >
               {MAIRIE.email}
             </a>

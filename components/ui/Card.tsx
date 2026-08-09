@@ -34,10 +34,10 @@ export function Card({
   }).format(new Date(date));
 
   return (
-    <article className="group flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-md">
+    <article className="group flex flex-col overflow-hidden border border-sable bg-surface shadow-sm transition-shadow hover:shadow-md">
       {/* Image */}
       {imageSrc && (
-        <div className="relative h-48 w-full overflow-hidden bg-gray-100">
+        <div className="relative h-48 w-full overflow-hidden bg-sable-clair">
           <Image
             src={imageSrc}
             alt={imageAlt}
@@ -51,30 +51,30 @@ export function Card({
       <div className="flex flex-1 flex-col gap-3 p-4">
         {/* Métadonnées */}
         <div className="flex items-center gap-2">
-          <time dateTime={date} className="text-xs text-gray-500">
+          <time dateTime={date} className="text-xs text-encre-secondaire">
             {dateFormatted}
           </time>
           {category && <Badge color="green">{category}</Badge>}
         </div>
 
         {/* Titre avec lien principal */}
-        <h3 className="text-base font-semibold leading-snug text-gray-900">
+        <h3 className="text-base font-semibold leading-snug text-encre">
           <Link
             href={href}
             aria-label={`Lire l'article : ${title}`}
-            className="rounded after:absolute after:inset-0 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+            className="rounded after:absolute after:inset-0 focus:outline-none focus:ring-2 focus:ring-terre-fonce focus:ring-offset-2"
           >
             {title}
           </Link>
         </h3>
 
         {/* Extrait */}
-        <p className="line-clamp-3 flex-1 text-sm text-gray-600">{excerpt}</p>
+        <p className="line-clamp-3 flex-1 text-sm text-encre-courant">{excerpt}</p>
 
         {/* CTA */}
         <span
           aria-hidden="true"
-          className="mt-auto text-sm font-medium text-primary group-hover:underline"
+          className="mt-auto text-sm font-medium text-terre-fonce group-hover:underline"
         >
           Lire la suite →
         </span>

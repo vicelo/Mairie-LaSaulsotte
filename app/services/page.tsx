@@ -53,8 +53,8 @@ export default function ServicesPage() {
       <Breadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Services" }]} />
 
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Services</h1>
-        <p className="mt-2 text-gray-600">
+        <h1 className="text-[34px] leading-[1.1] nav:text-[52px]">Services</h1>
+        <p className="mt-2 text-encre-courant">
           La mairie de La Saulsotte met à disposition des habitants un ensemble de services de
           proximité.
         </p>
@@ -65,13 +65,13 @@ export default function ServicesPage() {
           <Link
             key={s.href}
             href={s.href}
-            className="group rounded-xl border border-gray-200 bg-white p-6 transition-shadow hover:border-primary hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+            className="group border border-sable bg-surface p-6 transition-shadow hover:border-foret hover:shadow-md focus:outline-none focus:ring-2 focus:ring-terre-fonce focus:ring-offset-2"
           >
             <div className="mb-3 text-3xl" aria-hidden="true">
               {s.icone}
             </div>
-            <h2 className="font-semibold text-gray-900 group-hover:text-primary">{s.titre}</h2>
-            <p className="mt-1 text-sm text-gray-600">{s.description}</p>
+            <h2 className="font-semibold text-encre group-hover:text-terre-fonce">{s.titre}</h2>
+            <p className="mt-1 text-sm text-encre-courant">{s.description}</p>
           </Link>
         ))}
       </div>

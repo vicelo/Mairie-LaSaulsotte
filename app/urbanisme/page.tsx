@@ -88,14 +88,14 @@ export default function UrbanismePage() {
     <PageLayout>
       <Breadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Urbanisme" }]} />
 
-      <h1 className="mb-8 text-3xl font-bold text-gray-900">Urbanisme</h1>
+      <h1 className="mb-8 text-[34px] leading-[1.1] nav:text-[52px]">Urbanisme</h1>
 
       {/* ── PLU ──────────────────────────────────────────────────────── */}
       <section aria-labelledby="plu-titre" className="mb-12">
-        <h2 id="plu-titre" className="mb-2 text-2xl font-bold text-gray-800">
+        <h2 id="plu-titre" className="mb-2 text-2xl font-bold text-encre">
           Plan Local d&apos;Urbanisme (PLU)
         </h2>
-        <p className="mb-6 text-gray-600">
+        <p className="mb-6 text-encre-courant">
           Le PLU définit les règles d&apos;utilisation des sols sur l&apos;ensemble du territoire
           communal. Il fixe les zones constructibles, les règles de gabarit, de recul et
           d&apos;aspect des constructions.
@@ -103,24 +103,21 @@ export default function UrbanismePage() {
 
         <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
           {PLU_ZONES.map((zone) => (
-            <div
-              key={zone.code}
-              className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm"
-            >
+            <div key={zone.code} className="border border-sable bg-surface p-4 shadow-sm">
               <div className="mb-1 flex items-center gap-2">
-                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary text-xs font-bold text-white">
+                <span className="inline-flex h-8 w-8 items-center justify-center rounded bg-foret text-xs font-bold text-white">
                   {zone.code}
                 </span>
-                <span className="font-semibold text-gray-900">{zone.label}</span>
+                <span className="font-semibold text-encre">{zone.label}</span>
               </div>
-              <p className="text-sm text-gray-600">{zone.description}</p>
+              <p className="text-sm text-encre-courant">{zone.description}</p>
             </div>
           ))}
         </div>
 
-        <div className="mb-4 rounded-lg border border-blue-100 bg-blue-50 p-3 text-sm text-blue-800">
+        <div className="mb-4 rounded-lg border border-sable bg-surface p-3 text-sm text-foret">
           Le document PLU est consultable et disponible sur demande en mairie — 10 Rue Pavée,{" "}
-          <a href="tel:+33325398228" className="underline hover:text-blue-900">
+          <a href="tel:+33325398228" className="underline hover:text-encre">
             03 25 39 82 28
           </a>
           .
@@ -130,7 +127,7 @@ export default function UrbanismePage() {
             href="https://www.geoportail.gouv.fr"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:border-primary hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+            className="inline-flex items-center gap-2 rounded-md border border-sable bg-surface px-4 py-2 text-sm font-medium text-encre-courant transition-colors hover:border-foret hover:text-terre-fonce focus:outline-none focus:ring-2 focus:ring-terre-fonce focus:ring-offset-2"
           >
             Consulter sur Géoportail
             <span className="sr-only">(s&apos;ouvre dans un nouvel onglet)</span>
@@ -140,7 +137,7 @@ export default function UrbanismePage() {
 
       {/* ── Démarches d'urbanisme ────────────────────────────────────── */}
       <section aria-labelledby="demarches-titre" className="mb-12">
-        <h2 id="demarches-titre" className="mb-6 text-2xl font-bold text-gray-800">
+        <h2 id="demarches-titre" className="mb-6 text-[26px] nav:text-[34px]">
           Autorisations d&apos;urbanisme
         </h2>
 
@@ -148,28 +145,28 @@ export default function UrbanismePage() {
           {PERMIS.map((permis) => (
             <article
               key={permis.id}
-              className="flex flex-col rounded-xl border border-gray-200 bg-white p-5 shadow-sm"
+              className="flex flex-col border border-sable bg-surface p-5 shadow-sm"
             >
               <div className="mb-3 flex items-start justify-between gap-2">
-                <h3 className="font-semibold text-gray-900">{permis.title}</h3>
+                <h3 className="font-semibold text-encre">{permis.title}</h3>
                 <Badge color={permis.badge.color}>{permis.badge.label}</Badge>
               </div>
-              <p className="mb-4 flex-1 text-sm text-gray-600">{permis.description}</p>
+              <p className="mb-4 flex-1 text-sm text-encre-courant">{permis.description}</p>
               <dl className="mb-4 space-y-1 text-sm">
                 <div className="flex gap-2">
-                  <dt className="font-medium text-gray-600">Délai :</dt>
-                  <dd className="text-gray-700">{permis.delai}</dd>
+                  <dt className="font-medium text-encre-courant">Délai :</dt>
+                  <dd className="text-encre-courant">{permis.delai}</dd>
                 </div>
                 <div className="flex gap-2">
-                  <dt className="font-medium text-gray-600">Formulaire :</dt>
-                  <dd className="text-gray-700">Cerfa n° {permis.cerfa}</dd>
+                  <dt className="font-medium text-encre-courant">Formulaire :</dt>
+                  <dd className="text-encre-courant">Cerfa n° {permis.cerfa}</dd>
                 </div>
               </dl>
               <a
                 href={permis.lien}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded text-sm font-medium text-primary underline hover:text-primary/80 focus:outline-none focus:ring-2 focus:ring-primary"
+                className="rounded text-sm font-medium text-terre-fonce underline hover:text-terre-fonce focus:outline-none focus:ring-2 focus:ring-terre-fonce"
               >
                 En savoir plus sur service-public.fr
                 <span className="sr-only"> (s&apos;ouvre dans un nouvel onglet)</span>
@@ -178,13 +175,13 @@ export default function UrbanismePage() {
           ))}
         </div>
 
-        <div className="mt-6 rounded-xl border border-primary-100 bg-primary-100 p-4 text-sm text-primary">
+        <div className="mt-6 border border-sable bg-sable-clair p-4 text-sm text-terre-fonce">
           Les dossiers doivent être déposés en mairie en <strong>2 exemplaires</strong>. Un accusé
           de réception vous sera remis immédiatement. Pour tout conseil préalable, contactez le
           service urbanisme au{" "}
           <a
             href="tel:+33325398228"
-            className="rounded underline hover:text-primary/80 focus:outline-none focus:ring-2 focus:ring-primary"
+            className="rounded underline hover:text-terre-fonce focus:outline-none focus:ring-2 focus:ring-terre-fonce"
           >
             03 25 39 82 28
           </a>
@@ -194,10 +191,10 @@ export default function UrbanismePage() {
 
       {/* ── Déclaration d'achèvement ─────────────────────────────────── */}
       <section aria-labelledby="achevement-titre">
-        <h2 id="achevement-titre" className="mb-4 text-2xl font-bold text-gray-800">
+        <h2 id="achevement-titre" className="mb-4 text-[26px] nav:text-[34px]">
           Déclaration d&apos;achèvement des travaux
         </h2>
-        <p className="mb-4 text-gray-600">
+        <p className="mb-4 text-encre-courant">
           À la fin de vos travaux, vous devez déposer une{" "}
           <strong>
             Déclaration Attestant l&apos;Achèvement et la Conformité des Travaux (DAACT)
@@ -209,7 +206,7 @@ export default function UrbanismePage() {
           href="https://www.service-public.fr/particuliers/vosdroits/F1972"
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded text-sm font-medium text-primary underline hover:text-primary/80 focus:outline-none focus:ring-2 focus:ring-primary"
+          className="rounded text-sm font-medium text-terre-fonce underline hover:text-terre-fonce focus:outline-none focus:ring-2 focus:ring-terre-fonce"
         >
           En savoir plus sur la DAACT
           <span className="sr-only"> (s&apos;ouvre dans un nouvel onglet)</span>

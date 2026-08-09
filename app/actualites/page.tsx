@@ -21,8 +21,10 @@ export default function ActualitesPage() {
       <Breadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Actualités" }]} />
 
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Actualités</h1>
-        <p className="mt-2 text-gray-600">Toutes les informations de la commune de La Saulsotte.</p>
+        <h1 className="text-[34px] leading-[1.1] nav:text-[52px]">Actualités</h1>
+        <p className="mt-2 text-encre-courant">
+          Toutes les informations de la commune de La Saulsotte.
+        </p>
       </div>
 
       <ActualitesClient actualites={actualites} />

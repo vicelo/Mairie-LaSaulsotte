@@ -52,13 +52,13 @@ export default function ArticlePage({ params }: Props) {
 
       if (line.startsWith("## ")) {
         elements.push(
-          <h2 key={i} className="mb-3 mt-8 text-xl font-bold text-gray-900">
+          <h2 key={i} className="mb-3 mt-8 text-xl font-bold text-encre">
             {line.replace("## ", "")}
           </h2>
         );
       } else if (line.startsWith("### ")) {
         elements.push(
-          <h3 key={i} className="mb-2 mt-6 text-lg font-semibold text-gray-800">
+          <h3 key={i} className="mb-2 mt-6 text-lg font-semibold text-encre">
             {line.replace("### ", "")}
           </h3>
         );
@@ -69,7 +69,7 @@ export default function ArticlePage({ params }: Props) {
           i++;
         }
         elements.push(
-          <ul key={`ul-${i}`} className="mb-4 ml-4 list-disc space-y-1 text-gray-700">
+          <ul key={`ul-${i}`} className="mb-4 ml-4 list-disc space-y-1 text-encre-courant">
             {listItems.map((item, j) => (
               <li
                 key={j}
@@ -97,24 +97,24 @@ export default function ArticlePage({ params }: Props) {
           .map((h) => h.trim());
         elements.push(
           <div key={`table-${i}`} className="mb-4 overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200 text-sm">
+            <table className="min-w-full divide-y divide-sable text-sm">
               <thead>
-                <tr className="bg-gray-50">
+                <tr className="bg-surface">
                   {headers.map((h, j) => (
-                    <th key={j} className="px-4 py-2 text-left font-semibold text-gray-700">
+                    <th key={j} className="px-4 py-2 text-left font-semibold text-encre-courant">
                       {h}
                     </th>
                   ))}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100">
+              <tbody className="divide-y divide-sable-clair">
                 {bodyRows.map((row, rIdx) => (
                   <tr key={rIdx}>
                     {row
                       .split("|")
                       .filter(Boolean)
                       .map((cell, cIdx) => (
-                        <td key={cIdx} className="px-4 py-2 text-gray-700">
+                        <td key={cIdx} className="px-4 py-2 text-encre-courant">
                           {cell.trim()}
                         </td>
                       ))}
@@ -129,13 +129,13 @@ export default function ArticlePage({ params }: Props) {
         elements.push(
           <p
             key={i}
-            className="mb-4 leading-relaxed text-gray-700"
+            className="mb-4 leading-relaxed text-encre-courant"
             dangerouslySetInnerHTML={{
               __html: line
                 .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
                 .replace(
                   /\[(.+?)\]\((.+?)\)/g,
-                  '<a href="$2" class="text-primary underline hover:text-primary/80">$1</a>'
+                  '<a href="$2" class="text-terre-fonce underline hover:text-terre-fonce">$1</a>'
                 ),
             }}
           />
@@ -161,24 +161,24 @@ export default function ArticlePage({ params }: Props) {
         <header className="mb-8">
           <div className="mb-3 flex items-center gap-3">
             <Badge color="green">{article.category}</Badge>
-            <time dateTime={article.date} className="text-sm text-gray-500">
+            <time dateTime={article.date} className="text-sm text-encre-secondaire">
               {dateFormatted}
             </time>
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 sm:text-4xl">{article.title}</h1>
-          <p className="mt-3 text-lg text-gray-600">{article.excerpt}</p>
+          <h1 className="text-3xl font-bold text-encre sm:text-4xl">{article.title}</h1>
+          <p className="mt-3 text-lg text-encre-courant">{article.excerpt}</p>
         </header>
 
         {/* Corps de l'article */}
-        <div className="prose-like border-t border-gray-200 pt-8">
+        <div className="prose-like border-t border-sable pt-8">
           {renderContent(article.content)}
         </div>
 
         {/* Navigation retour */}
-        <div className="mt-10 border-t border-gray-200 pt-6">
+        <div className="mt-10 border-t border-sable pt-6">
           <Link
             href="/actualites"
-            className="inline-flex items-center gap-2 rounded text-sm font-medium text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary"
+            className="inline-flex items-center gap-2 rounded text-sm font-medium text-terre-fonce hover:underline focus:outline-none focus:ring-2 focus:ring-terre-fonce"
           >
             ← Retour aux actualités
           </Link>

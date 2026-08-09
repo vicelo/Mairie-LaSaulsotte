@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 64" role="img" aria-label="Blason de La Saulsotte">
+  <title>Blason de La Saulsotte</title>
+  <path d="M2 2 H48 V34 Q48 52 25 62 Q2 52 2 34 Z" fill="#2E4034"></path>
+  <path d="M7 7 H43 V33 Q43 47 25 55 Q7 47 7 33 Z" fill="none" stroke="#7E8F7C" stroke-width="1"></path>
+  <line x1="25" y1="47" x2="25" y2="16" stroke="#D8CDB4" stroke-width="1.6" stroke-linecap="round"></line>
+  <path d="M25 40 Q18 35 17 28 Q22 31 25 38 Z" fill="#B5643C"></path>
+  <path d="M25 33 Q19 28 19 22 Q23 25 25 31 Z" fill="#B5643C" opacity="0.85"></path>
+  <path d="M25 26 Q20 21 21 16 Q24 19 25 24 Z" fill="#B5643C" opacity="0.65"></path>
+  <path d="M25 40 Q32 35 33 28 Q28 31 25 38 Z" fill="#B5643C"></path>
+  <path d="M25 33 Q31 28 31 22 Q27 25 25 31 Z" fill="#B5643C" opacity="0.85"></path>
+  <path d="M25 26 Q30 21 29 16 Q26 19 25 24 Z" fill="#B5643C" opacity="0.65"></path>
+</svg>

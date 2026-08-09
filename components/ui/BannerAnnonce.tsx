@@ -75,7 +75,7 @@ export function BannerAnnonce({ annonces: annoncesRecues, speed = 60 }: BannerAn
   const duree = Math.max(10, texteTotal.length / (speed / 10));
 
   return (
-    <div className="relative overflow-hidden bg-primary-100 text-primary">
+    <div className="relative overflow-hidden bg-sable-clair text-terre-fonce">
       {/* Liste statique pour lecteurs d'écran uniquement */}
       <ul className="sr-only" aria-label="Annonces de la mairie">
         {annonces.map((a) => (
@@ -92,7 +92,7 @@ export function BannerAnnonce({ annonces: annoncesRecues, speed = 60 }: BannerAn
         onFocus={() => setPaused(true)}
         onBlur={() => setPaused(false)}
       >
-        <span className="shrink-0 text-xs font-bold uppercase tracking-widest text-primary">
+        <span className="shrink-0 text-xs font-bold uppercase tracking-widest text-terre-fonce">
           Annonces
         </span>
 
@@ -113,7 +113,7 @@ export function BannerAnnonce({ annonces: annoncesRecues, speed = 60 }: BannerAn
                 {a.href ? (
                   <a
                     href={a.href}
-                    className="rounded hover:underline focus:outline-none focus:ring-2 focus:ring-primary"
+                    className="rounded hover:underline focus:outline-none focus:ring-2 focus:ring-terre-fonce"
                     tabIndex={-1} /* navigation clavier via la liste sr-only */
                   >
                     {a.texte}
@@ -133,7 +133,7 @@ export function BannerAnnonce({ annonces: annoncesRecues, speed = 60 }: BannerAn
         aria-label={isPaused ? "Reprendre le défilement" : "Mettre en pause le défilement"}
         aria-pressed={isPaused}
         onClick={() => setPaused((p) => !p)}
-        className="absolute right-2 top-1/2 -translate-y-1/2 rounded p-1 text-primary hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary"
+        className="absolute right-2 top-1/2 -translate-y-1/2 rounded p-1 text-terre-fonce hover:bg-sable focus:outline-none focus:ring-2 focus:ring-terre-fonce"
       >
         {isPaused ? (
           /* ▶ play */

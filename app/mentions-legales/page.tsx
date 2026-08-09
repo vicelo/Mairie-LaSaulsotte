@@ -20,8 +20,8 @@ export default function MentionsLegalesPage() {
       <Breadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Mentions légales" }]} />
 
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Mentions légales</h1>
-        <p className="mt-2 max-w-3xl text-gray-600">
+        <h1 className="text-[34px] leading-[1.1] nav:text-[52px]">Mentions légales</h1>
+        <p className="mt-2 max-w-3xl text-encre-courant">
           Conformément aux dispositions de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans
           l&apos;économie numérique, il est précisé ci-après l&apos;identité des différents
           intervenants dans le cadre de la réalisation et du suivi de ce site.
@@ -29,39 +29,42 @@ export default function MentionsLegalesPage() {
       </div>
 
       <div className="space-y-6">
-        <section className="rounded-xl border border-gray-200 bg-white p-6">
-          <h2 className="mb-4 text-xl font-semibold text-gray-900">Éditeur du site</h2>
+        <section className="border border-sable bg-surface p-6">
+          <h2 className="mb-4 text-[22px]">Éditeur du site</h2>
           <dl className="space-y-3 text-sm">
             <div>
-              <dt className="font-medium text-gray-700">Dénomination</dt>
-              <dd className="text-gray-900">Mairie de {COMMUNE.nom}</dd>
+              <dt className="font-medium text-encre-courant">Dénomination</dt>
+              <dd className="text-encre">Mairie de {COMMUNE.nom}</dd>
             </div>
             <div>
-              <dt className="font-medium text-gray-700">Adresse</dt>
-              <dd className="text-gray-900">{ADRESSE_COMPLETE}</dd>
+              <dt className="font-medium text-encre-courant">Adresse</dt>
+              <dd className="text-encre">{ADRESSE_COMPLETE}</dd>
             </div>
             <div>
-              <dt className="font-medium text-gray-700">Téléphone</dt>
-              <dd className="text-gray-900">
-                <a href={`tel:${MAIRIE.telephoneLien}`} className="text-primary hover:underline">
+              <dt className="font-medium text-encre-courant">Téléphone</dt>
+              <dd className="text-encre">
+                <a
+                  href={`tel:${MAIRIE.telephoneLien}`}
+                  className="text-terre-fonce hover:underline"
+                >
                   {MAIRIE.telephone}
                 </a>
               </dd>
             </div>
             <div>
-              <dt className="font-medium text-gray-700">Courriel</dt>
-              <dd className="text-gray-900">
+              <dt className="font-medium text-encre-courant">Courriel</dt>
+              <dd className="text-encre">
                 <a
                   href={`mailto:${MAIRIE.email}`}
-                  className="break-all text-primary hover:underline"
+                  className="break-all text-terre-fonce hover:underline"
                 >
                   {MAIRIE.email}
                 </a>
               </dd>
             </div>
             <div>
-              <dt className="font-medium text-gray-700">Direction de la publication</dt>
-              <dd className="text-gray-900">
+              <dt className="font-medium text-encre-courant">Direction de la publication</dt>
+              <dd className="text-encre">
                 {maire ? `${maire.nom}, ${maire.fonction.toLowerCase()}` : "Le maire"} de{" "}
                 {COMMUNE.nom}
               </dd>
@@ -69,27 +72,27 @@ export default function MentionsLegalesPage() {
           </dl>
         </section>
 
-        <section className="rounded-xl border border-gray-200 bg-white p-6">
-          <h2 className="mb-4 text-xl font-semibold text-gray-900">Hébergement</h2>
+        <section className="border border-sable bg-surface p-6">
+          <h2 className="mb-4 text-[22px]">Hébergement</h2>
           <dl className="space-y-3 text-sm">
             <div>
-              <dt className="font-medium text-gray-700">Hébergeur</dt>
-              <dd className="text-gray-900">Vercel Inc.</dd>
+              <dt className="font-medium text-encre-courant">Hébergeur</dt>
+              <dd className="text-encre">Vercel Inc.</dd>
             </div>
             <div>
-              <dt className="font-medium text-gray-700">Adresse</dt>
-              <dd className="text-gray-900">
+              <dt className="font-medium text-encre-courant">Adresse</dt>
+              <dd className="text-encre">
                 340 Pine Street, Suite 1300 — San Francisco, CA 94104, États-Unis
               </dd>
             </div>
             <div>
-              <dt className="font-medium text-gray-700">Site web</dt>
-              <dd className="text-gray-900">
+              <dt className="font-medium text-encre-courant">Site web</dt>
+              <dd className="text-encre">
                 <a
                   href="https://vercel.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-primary hover:underline"
+                  className="text-terre-fonce hover:underline"
                 >
                   vercel.com
                   <span className="sr-only"> (s&apos;ouvre dans un nouvel onglet)</span>
@@ -99,39 +102,39 @@ export default function MentionsLegalesPage() {
           </dl>
         </section>
 
-        <section className="rounded-xl border border-gray-200 bg-white p-6">
-          <h2 className="mb-4 text-xl font-semibold text-gray-900">Propriété intellectuelle</h2>
-          <p className="text-sm text-gray-700">
+        <section className="border border-sable bg-surface p-6">
+          <h2 className="mb-4 text-[22px]">Propriété intellectuelle</h2>
+          <p className="text-sm text-encre-courant">
             Sauf mention contraire, les textes de ce site sont la propriété de la Mairie de{" "}
             {COMMUNE.nom}. Toute reproduction, représentation, modification ou adaptation, totale ou
             partielle, est soumise à l&apos;accord préalable écrit de la mairie.
           </p>
-          <p className="mt-3 text-sm text-gray-700">
+          <p className="mt-3 text-sm text-encre-courant">
             Les photographies font exception : elles sont diffusées sous licence Creative Commons et
             restent la propriété de leurs auteurs, dans les conditions détaillées ci-dessous.
           </p>
         </section>
 
         {/* ── Crédits photographiques ────────────────────────────────── */}
-        <section className="rounded-xl border border-gray-200 bg-white p-6">
-          <h2 className="mb-4 text-xl font-semibold text-gray-900">Crédits photographiques</h2>
-          <p className="mb-4 text-sm text-gray-700">
+        <section className="border border-sable bg-surface p-6">
+          <h2 className="mb-4 text-[22px]">Crédits photographiques</h2>
+          <p className="mb-4 text-sm text-encre-courant">
             Les photographies illustrant ce site proviennent de Wikimedia Commons et sont diffusées
             sous licence Creative Commons Attribution — Partage dans les mêmes conditions. Leur
             réutilisation est libre, sous réserve de créditer l&apos;auteur et de conserver la même
             licence.
           </p>
-          <ul role="list" className="divide-y divide-gray-100 text-sm">
+          <ul role="list" className="divide-y divide-sable-clair text-sm">
             {TOUTES_LES_PHOTOS.map((photo) => (
               <li key={photo.src} className="py-3">
-                <p className="font-medium text-gray-900">{photo.legende}</p>
-                <p className="mt-1 text-gray-600">
+                <p className="font-medium text-encre">{photo.legende}</p>
+                <p className="mt-1 text-encre-courant">
                   © {photo.auteur} —{" "}
                   <a
                     href={photo.licenceUrl}
                     target="_blank"
                     rel="noopener noreferrer license"
-                    className="text-primary hover:underline"
+                    className="text-terre-fonce hover:underline"
                   >
                     {photo.licence}
                     <span className="sr-only"> (s&apos;ouvre dans un nouvel onglet)</span>
@@ -141,7 +144,7 @@ export default function MentionsLegalesPage() {
                     href={photo.source}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-primary hover:underline"
+                    className="text-terre-fonce hover:underline"
                   >
                     source
                     <span className="sr-only">
@@ -155,12 +158,12 @@ export default function MentionsLegalesPage() {
           </ul>
         </section>
 
-        <section className="rounded-xl border border-gray-200 bg-white p-6">
-          <h2 className="mb-4 text-xl font-semibold text-gray-900">Données personnelles</h2>
-          <p className="text-sm text-gray-700">
+        <section className="border border-sable bg-surface p-6">
+          <h2 className="mb-4 text-[22px]">Données personnelles</h2>
+          <p className="text-sm text-encre-courant">
             Les informations relatives à la collecte et au traitement des données personnelles sont
             détaillées dans notre{" "}
-            <Link href="/confidentialite" className="text-primary hover:underline">
+            <Link href="/confidentialite" className="text-terre-fonce hover:underline">
               politique de confidentialité
             </Link>
             .
