@@ -10,7 +10,9 @@
     {
       "code": "11",
       "libelle": "Inondation",
-      "precisions": ["Par une crue à débordement lent de cours d'eau"]
+      "precisions": [
+        "Par une crue à débordement lent de cours d'eau"
+      ]
     },
     {
       "code": "12",
